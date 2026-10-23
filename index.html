@@ -1,0 +1,1994 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ahmed Hossam – Backend Engineer</title>
+<meta name="description" content="Ahmed Hossam, Backend Engineer in Alexandria, Egypt. Node.js, Express and PostgreSQL: building scalable APIs and reviewing AI-written code.">
+<meta name="author" content="Ahmed Hossam">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#030604">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ahmed Hossam – Backend Engineer">
+<meta property="og:description" content="Node.js, Express and PostgreSQL. Building scalable APIs and reviewing AI-written code. Alexandria, Egypt.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23030604'/%3E%3Cpath d='M8 10l6 6-6 6' fill='none' stroke='%234dff88' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M16 23h9' stroke='%234dff88' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap">
+<script>
+  (function () {
+    var d = document.documentElement;
+    d.classList.add('js');
+    try { if (localStorage.getItem('phosphor') === 'amber') d.setAttribute('data-phosphor', 'amber'); } catch (e) {}
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      d.classList.add('booting');
+      setTimeout(function () { d.classList.remove('booting'); }, 3500);
+    }
+  })();
+</script>
+<style>
+  /* =========================================================
+     tokens
+     ========================================================= */
+  :root {
+    --void: #030604;
+    --pane: #07110b;
+    --pane-2: #0b1a11;
+    --rule: #143221;
+    --rule-2: #21503a;
+    --phos: #4dff88;
+    --phos-2: #2fbf65;
+    --glow: 77 255 136;
+    --ink: #c6f3d2;
+    --dim: #82a68c;
+    --amber: #ffb547;
+    --red: #ff6b6b;
+    --hot: #eafff0;
+    --cloth-1: #0d1a13;
+    --cloth-2: #030605;
+    --cloth-fold: #152b1f;
+
+    --r-xs: 6px;
+    --r-sm: 12px;
+    --r-md: 16px;
+    --r-lg: 22px;
+    --r-xl: 28px;
+
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --mono: "Martian Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    --bar-h: 52px;
+    --bar-top: 12px;
+    --head-room: calc(var(--bar-h) + var(--bar-top) + env(safe-area-inset-top, 0px) + 16px);
+    --gutter: clamp(16px, 4vw, 40px);
+    --sec-gap: clamp(110px, 16vh, 190px);
+    color-scheme: dark;
+  }
+  :root[data-phosphor="amber"] {
+    --void: #060402;
+    --pane: #110c06;
+    --pane-2: #1b1309;
+    --rule: #36270f;
+    --rule-2: #5b431d;
+    --phos: #ffbf5e;
+    --phos-2: #d19237;
+    --glow: 255 191 94;
+    --ink: #f6e3c4;
+    --dim: #b09d80;
+    --amber: #7dffb0;
+    --red: #ff7a6b;
+    --hot: #fff6e6;
+    --cloth-1: #1a130a;
+    --cloth-2: #060402;
+    --cloth-fold: #2b2010;
+  }
+
+  /* =========================================================
+     base
+     ========================================================= */
+  *, *::before, *::after { box-sizing: border-box; }
+  html {
+    background: var(--void);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scrollbar-color: var(--rule-2) var(--void);
+    scrollbar-width: thin;
+  }
+  @media (prefers-reduced-motion: no-preference) { html:not(.lenis) { scroll-behavior: smooth; } }
+  html.lenis, html.lenis body { height: auto; }
+  .lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+  .lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--void);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.7;
+    font-stretch: 90%;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  ::selection { background: var(--phos); color: var(--void); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
+  ::-webkit-scrollbar-thumb { background: var(--rule-2); border: 2px solid var(--void); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--phos-2); }
+  h1, h2, h3, p, ul, ol, dl, dd, pre, figure { margin: 0; }
+  ul, ol { padding: 0; }
+  button { font: inherit; color: inherit; touch-action: manipulation; }
+  img { display: block; max-width: 100%; }
+  a { color: var(--phos); text-decoration-thickness: 1px; text-underline-offset: 4px; text-decoration-color: var(--rule-2); }
+  :focus-visible { outline: 2px solid var(--phos); outline-offset: 3px; border-radius: var(--r-xs); }
+  [tabindex="-1"]:focus { outline: none; }
+  .sr-only {
+    position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+  html:not(.js) .js-only { display: none !important; }
+  .booting [data-boot] { visibility: hidden; }
+  .icon {
+    width: 16px; height: 16px; flex: none;
+    fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .logo { width: 20px; height: 20px; flex: none; fill: currentColor; }
+  .ps { color: var(--phos-2); }
+  .nw { white-space: nowrap; }
+  .wrap { width: min(1180px, calc(100% - 2 * var(--gutter))); margin-inline: auto; }
+
+  .panel {
+    position: relative;
+    border: 1px solid var(--rule);
+    border-radius: var(--r-lg);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--pane-2) 70%, transparent), color-mix(in srgb, var(--pane) 88%, transparent));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / .035),
+      0 40px 80px -48px rgb(0 0 0 / .95);
+  }
+  .skip {
+    position: fixed; left: 12px; top: 12px; z-index: 100;
+    padding: 10px 14px; border-radius: var(--r-sm);
+    background: var(--phos); color: var(--void);
+    font-weight: 700; text-decoration: none;
+    transform: translateY(-180%);
+    transition: transform 160ms var(--ease-out);
+  }
+  .skip:focus-visible { transform: none; outline-color: var(--hot); }
+
+  /* =========================================================
+     screen layers
+     ========================================================= */
+  #rain {
+    position: fixed; inset: 0; z-index: 0;
+    width: 100%; height: 100%;
+    opacity: var(--rain-o, .26);
+    pointer-events: none;
+    transition: opacity 600ms var(--ease-out);
+  }
+  @media (max-width: 760px) { #rain { opacity: calc(var(--rain-o, .26) * .65); } }
+  .matrix-mode #rain { opacity: .85 !important; }
+  .crt {
+    position: fixed; inset: 0; z-index: 80; pointer-events: none;
+    background:
+      radial-gradient(130% 100% at 50% 45%, transparent 62%, rgb(0 0 0 / .4) 100%),
+      repeating-linear-gradient(to bottom, rgb(0 0 0 / .12) 0 1px, transparent 1px 3px);
+  }
+  .crt { transition: opacity 350ms var(--ease-out); }
+  .crt.is-off { opacity: 0; }
+  .crt::after {
+    content: ""; position: absolute; inset: 0; opacity: .05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  main, .foot { position: relative; z-index: 1; }
+
+  /* =========================================================
+     floating status bar
+     ========================================================= */
+  .bar {
+    position: fixed; z-index: 50;
+    top: calc(var(--bar-top) + env(safe-area-inset-top, 0px));
+    left: 50%; transform: translateX(-50%);
+    width: min(1200px, calc(100% - 24px));
+    height: var(--bar-h);
+    display: flex; align-items: center; gap: 6px;
+    padding: 0 8px;
+    border: 1px solid var(--rule);
+    border-radius: var(--r-md);
+    background: color-mix(in srgb, var(--pane) 80%, transparent);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    backdrop-filter: blur(16px) saturate(140%);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / .04), 0 16px 40px -20px rgb(0 0 0 / .9);
+    font-size: 12.5px; line-height: 1;
+    overflow: hidden;
+  }
+  .bar-progress {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+    background: var(--phos); box-shadow: 0 0 10px rgb(var(--glow) / .8);
+    transform-origin: left; transform: scaleX(var(--progress, 0));
+  }
+  .bar-session {
+    display: flex; align-items: center; flex: none;
+    height: 36px; padding: 0 12px;
+    border-radius: 10px;
+    background: var(--phos); color: var(--void);
+    font-weight: 700; text-decoration: none; white-space: nowrap;
+    transition: background-color 150ms var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) { .bar-session:hover { background: var(--hot); } }
+  .bar-tabs { position: relative; display: flex; align-items: center; min-width: 0; height: 100%; overflow-x: auto; scrollbar-width: none; }
+  .bar-tabs::-webkit-scrollbar { display: none; }
+  .bar-ind {
+    position: absolute; left: 0; top: 50%; height: 34px; width: 0;
+    margin-top: -17px;
+    border-radius: 10px;
+    background: var(--pane-2);
+    box-shadow: inset 0 0 0 1px var(--rule-2), inset 0 -2px 0 var(--phos);
+    opacity: 0;
+    transition: transform 420ms var(--ease-out), width 420ms var(--ease-out), opacity 200ms var(--ease-out);
+    pointer-events: none;
+  }
+  .bar-tabs.has-ind .bar-ind { opacity: 1; }
+  .bar-tab {
+    position: relative; z-index: 1;
+    display: flex; align-items: center;
+    height: 34px; padding: 0 12px;
+    border-radius: 10px;
+    color: var(--dim); text-decoration: none; white-space: nowrap;
+    transition: color 200ms var(--ease-out), background-color 200ms var(--ease-out);
+  }
+  .bar-tab .n { color: var(--phos-2); }
+  .bar-tab[aria-current="true"] { color: var(--hot); background: var(--pane-2); }
+  .bar-tabs.has-ind .bar-tab[aria-current="true"] { background: transparent; }
+  .bar-tab[aria-current="true"] .n { color: var(--phos); }
+  @media (hover: hover) and (pointer: fine) { .bar-tab:hover { color: var(--ink); } }
+  .bar-tab:focus-visible { outline-offset: -2px; }
+  .bar-meta {
+    margin-left: auto; flex: none;
+    display: flex; align-items: center; gap: 18px;
+    padding: 0 10px;
+    color: var(--dim); white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .bar-open {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 30px; padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--amber) 35%, transparent);
+    color: var(--amber);
+  }
+  .bar-open::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--amber); box-shadow: 0 0 9px var(--amber);
+    animation: pulse 2.4s var(--ease-in-out) infinite;
+  }
+  @keyframes pulse { 50% { opacity: .3; } }
+  .bar-scroll { min-width: 4ch; text-align: right; color: var(--ink); }
+  @media (max-width: 1120px) { .bar-clock { display: none; } }
+  @media (max-width: 940px) { .bar-scroll { display: none; } }
+  @media (max-width: 760px) { .bar-meta { display: none; } }
+
+  /* =========================================================
+     buttons
+     ========================================================= */
+  .btn {
+    position: relative;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 48px; padding: 0 22px;
+    border: 1px solid var(--rule-2); border-radius: var(--r-sm);
+    background: color-mix(in srgb, var(--pane) 70%, transparent);
+    color: var(--ink);
+    font-size: 13.5px; font-weight: 500; text-decoration: none; white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out), border-color 160ms var(--ease-out), box-shadow 200ms var(--ease-out), transform 160ms var(--ease-out);
+  }
+  .btn:active { transform: scale(.97); }
+  .btn--primary {
+    background: var(--phos); border-color: var(--phos); color: var(--void); font-weight: 700;
+    box-shadow: 0 0 0 0 rgb(var(--glow) / 0), 0 10px 30px -12px rgb(var(--glow) / .55);
+  }
+  .btn--sm { min-height: 40px; padding: 0 16px; font-size: 13px; }
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover { border-color: var(--phos-2); color: var(--hot); background: var(--pane-2); }
+    .btn--primary:hover { background: var(--hot); border-color: var(--hot); color: var(--void); box-shadow: 0 0 0 4px rgb(var(--glow) / .14), 0 14px 34px -12px rgb(var(--glow) / .7); }
+  }
+
+  /* =========================================================
+     hero
+     ========================================================= */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid; align-content: center;
+    padding: var(--head-room) 0 clamp(56px, 9vh, 96px);
+  }
+  .hero-inner { display: grid; gap: clamp(22px, 4vh, 44px); }
+  .hero-top { padding-inline: var(--gutter); }
+  .hero-cmd { color: var(--dim); font-size: 14px; }
+  .hero-cmd .typed { color: var(--ink); }
+  .name { position: relative; width: 100%; margin: clamp(12px, 2vh, 20px) 0 0; line-height: 0; }
+  .name-text {
+    display: block;
+    font-size: clamp(44px, 9vw, 150px); font-weight: 800; font-stretch: 112.5%;
+    line-height: .95; letter-spacing: -0.03em; text-transform: uppercase;
+    color: var(--phos);
+    text-shadow: 0 0 28px rgb(var(--glow) / .35);
+  }
+  .name-canvas { display: none; max-width: none; }
+  .js .name.has-canvas .name-text {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+  }
+  .js .name.has-canvas .name-canvas { display: block; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr);
+    gap: clamp(28px, 4.5vw, 72px);
+    align-items: center;
+  }
+  .hero-role {
+    font-size: clamp(17px, 1.9vw, 22px); line-height: 1.5; font-weight: 500; font-stretch: 100%;
+    color: var(--hot);
+  }
+  .hero-role .gt { color: var(--phos); }
+  .hero-notes { margin-top: 18px; display: grid; gap: 4px; color: var(--dim); font-size: 14px; line-height: 1.75; }
+  .hero-notes p { padding-left: 3ch; text-indent: -3ch; }
+  .hero-notes .cm { color: var(--phos-2); }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+  .stage { position: relative; display: grid; justify-items: center; }
+  .hacker { position: relative; width: min(480px, 100%, 56svh); aspect-ratio: 10 / 11; }
+  .hacker canvas {
+    position: absolute; inset: 0; display: block; width: 100%; height: 100%;
+    filter: drop-shadow(0 0 24px rgb(var(--glow) / .3));
+    -webkit-mask-image: radial-gradient(closest-side, #000 72%, transparent 100%);
+    mask-image: radial-gradient(closest-side, #000 72%, transparent 100%);
+  }
+
+  .scroll-cue {
+    position: absolute; left: 50%; bottom: clamp(16px, 3vh, 30px); transform: translateX(-50%);
+    display: grid; justify-items: center; gap: 8px;
+    color: var(--dim); font-size: 11.5px; text-decoration: none; letter-spacing: .04em;
+    transition: opacity 300ms var(--ease-out);
+  }
+  .scroll-cue .track { position: relative; width: 1px; height: 38px; background: var(--rule-2); overflow: hidden; border-radius: 1px; }
+  .scroll-cue .track::after {
+    content: ""; position: absolute; left: 0; top: -40%; width: 100%; height: 40%;
+    background: var(--phos); box-shadow: 0 0 8px var(--phos);
+    animation: cue 1.8s var(--ease-in-out) infinite;
+  }
+  @keyframes cue { to { top: 100%; } }
+  .scrolled .scroll-cue { opacity: 0; pointer-events: none; }
+
+  /* =========================================================
+     sections
+     ========================================================= */
+  .sec { padding-top: var(--sec-gap); scroll-margin-top: calc(var(--head-room) - 30px); }
+  .sec:last-of-type { padding-bottom: var(--sec-gap); }
+  .sec-head {
+    position: relative;
+    display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline;
+    column-gap: clamp(14px, 2vw, 24px); row-gap: 6px;
+    padding-bottom: 22px;
+    margin-bottom: clamp(32px, 5vw, 56px);
+  }
+  .sec-num {
+    align-self: start;
+    padding: 4px 10px;
+    border: 1px solid var(--rule-2); border-radius: 999px;
+    color: var(--phos); font-size: 12px; font-variant-numeric: tabular-nums; line-height: 1.4;
+  }
+  .sec-cmd {
+    font-size: clamp(24px, 3.5vw, 42px); line-height: 1.15; font-weight: 700; font-stretch: 100%;
+    letter-spacing: -0.02em; color: var(--phos);
+    text-shadow: 0 0 26px rgb(var(--glow) / .25);
+  }
+  .sec-cmd .ps { font-weight: 400; }
+  .sec-rule {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+    background: linear-gradient(90deg, var(--phos-2), var(--rule) 38%, transparent);
+    transform-origin: left;
+  }
+  .caret {
+    display: inline-block; width: .55em; height: .9em; margin-left: .14em; vertical-align: -0.06em;
+    border-radius: 2px;
+    background: var(--phos);
+    animation: blink 1.06s steps(1, end) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- about ---------- */
+  .about-copy { max-width: 68ch; font-size: 17px; line-height: 1.9; color: var(--ink); }
+  .fetch { margin-top: clamp(28px, 4vw, 44px); padding: clamp(22px, 3vw, 36px); }
+  .facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px 32px; font-variant-numeric: tabular-nums; }
+  .facts dt { color: var(--amber); }
+  .facts dd { color: var(--ink); }
+  .facts b { color: var(--hot); font-weight: 700; }
+
+  /* ---------- experience ---------- */
+  .log { position: relative; padding-left: 40px; }
+  .log-rail { position: absolute; left: 7px; top: 14px; bottom: 6px; width: 2px; border-radius: 2px; background: var(--rule); }
+  .log-fill { position: absolute; inset: 0; border-radius: 2px; background: var(--phos-2); transform-origin: top; box-shadow: 0 0 12px rgb(var(--glow) / .6); }
+  .commits { list-style: none; }
+  .commit { position: relative; padding-bottom: clamp(28px, 4vw, 44px); }
+  .commit:last-child { padding-bottom: 0; }
+  .node {
+    position: absolute; left: -40px; top: 22px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--void);
+    border: 2px solid var(--phos);
+    box-shadow: 0 0 0 4px var(--void), 0 0 14px rgb(var(--glow) / .8);
+    transition: border-color 220ms var(--ease-out), box-shadow 220ms var(--ease-out), transform 260ms var(--ease-out);
+  }
+  .log-anim .commit:not(.lit) .node { border-color: var(--rule-2); box-shadow: 0 0 0 4px var(--void); transform: scale(.7); }
+  .commit-card { padding: clamp(18px, 2.4vw, 26px) clamp(18px, 2.6vw, 30px); border-radius: var(--r-lg); }
+  .commit-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 28px; }
+  .commit-title { font-size: clamp(17px, 2vw, 22px); line-height: 1.4; font-weight: 700; font-stretch: 100%; color: var(--hot); }
+  .commit-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .commit-date { color: var(--dim); font-size: 13.5px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 26px; padding: 0 10px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--amber) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--amber) 30%, transparent);
+    color: var(--amber); font-size: 11.5px; white-space: nowrap;
+  }
+  .tag .icon { width: 13px; height: 13px; }
+  .commit ul, .vol ul { list-style: none; margin-top: 14px; max-width: 78ch; }
+  .commit li, .vol li { position: relative; padding-left: 24px; margin-bottom: 7px; font-size: 14.5px; line-height: 1.75; }
+  .commit li:last-child, .vol li:last-child { margin-bottom: 0; }
+  .commit li::before, .vol li::before { content: "+"; position: absolute; left: 0; color: var(--phos-2); }
+
+  /* ---------- projects ---------- */
+  .pj { max-width: 980px; margin-inline: auto; }
+  .pj-sub { color: var(--dim); font-size: 14px; margin: 0 0 16px; }
+  .pj-grid + .pj-sub { margin-top: 44px; }
+  .pj-grid { display: grid; gap: 22px; }
+  .pj-grid.web { grid-template-columns: 1fr; }
+  .pj-grid.app { grid-template-columns: repeat(2, 1fr); }
+  .pj-card {
+    display: block; color: inherit; text-decoration: none;
+    background: var(--pane); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden;
+    transition: transform .25s, border-color .25s, box-shadow .25s;
+  }
+  .pj-card:hover { border-color: var(--phos); box-shadow: 0 0 34px rgb(var(--glow) / .25); }
+  .pj-shots { position: relative; aspect-ratio: 14 / 9; background: var(--void); border-bottom: 1px solid var(--rule); overflow: hidden; }
+  .pj-shots img, .pj-shots .pj-ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .7s; }
+  .pj-shots .on { opacity: 1; }
+  .pj-ph {
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+    color: var(--dim); font-size: 12px;
+    background: repeating-linear-gradient(45deg, var(--void) 0 12px, var(--pane) 12px 24px);
+  }
+  .pj-ph b { color: var(--phos-2); font-size: 13px; }
+  .pj-shots.app { aspect-ratio: 3 / 4; }
+  .pj-shots.app img { object-fit: contain; padding: 12px; }
+  .pj-dots { position: absolute; bottom: 8px; right: 10px; display: flex; gap: 5px; z-index: 2; }
+  .pj-dots span { width: 7px; height: 7px; border-radius: 50%; background: var(--rule-2); }
+  .pj-dots span.on { background: var(--phos); }
+  .pj-info { padding: 16px 18px 18px; }
+  .pj-info h3 { color: var(--hot); font-size: 17px; line-height: 1.3; font-weight: 700; font-stretch: 100%; display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+  .pj-info h3 span { font-size: 12px; color: var(--phos); font-weight: 400; white-space: nowrap; }
+  .pj-tag { color: var(--dim); font-size: 12px; margin: 4px 0 10px; }
+  .pj-role { font-size: 13px; color: var(--phos-2); margin-bottom: 8px; }
+  .pj-info p { font-size: 13.5px; line-height: 1.75; }
+
+  /* ---------- stack / bento ---------- */
+  .bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 14px; }
+  .bento-card { padding: clamp(20px, 2.4vw, 28px); border-radius: var(--r-lg); display: grid; align-content: start; gap: 18px; overflow: hidden; }
+  .bento-card.c-backend { grid-column: span 7; }
+  .bento-card.c-ai { grid-column: span 5; }
+  .bento-card.c-db { grid-column: span 5; }
+  .bento-card.c-front { grid-column: span 7; }
+  .bento-card.c-tools { grid-column: span 5; }
+  .bento-card.c-also { grid-column: span 7; }
+  .c-db .skills-list, .c-tools .skills-list, .c-ai .skills-list { grid-template-columns: minmax(0, 1fr); }
+  .card-head { display: flex; align-items: center; gap: 12px; }
+  .card-ico {
+    display: grid; place-items: center; width: 40px; height: 40px; flex: none;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--phos) 9%, transparent);
+    border: 1px solid color-mix(in srgb, var(--phos) 25%, transparent);
+    color: var(--phos);
+  }
+  .card-ico .icon { width: 19px; height: 19px; }
+  .card-head h3 { font-size: 17px; line-height: 1.3; font-weight: 700; font-stretch: 100%; color: var(--hot); }
+  .card-head .count { margin-left: auto; color: var(--dim); font-size: 12px; white-space: nowrap; }
+  .card-note { color: var(--dim); font-size: 13px; line-height: 1.7; margin-top: -6px; }
+  .skills-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .c-backend .skills-list { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+  .skill {
+    display: grid; grid-template-columns: 36px minmax(0, 1fr); align-items: center; column-gap: 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--rule); border-radius: var(--r-md);
+    background: color-mix(in srgb, var(--void) 55%, transparent);
+    transition: border-color 180ms var(--ease-out), background-color 180ms var(--ease-out);
+  }
+  .skill-ico {
+    grid-row: span 2;
+    display: grid; place-items: center; width: 36px; height: 36px;
+    border-radius: 10px; background: var(--pane-2);
+    color: var(--phos);
+    transition: color 180ms var(--ease-out), box-shadow 220ms var(--ease-out), transform 220ms var(--ease-out);
+  }
+  .skill-ico .logo { width: 18px; height: 18px; }
+  .skill-ico .icon { width: 18px; height: 18px; }
+  .skill .nm { color: var(--hot); font-size: 13.5px; line-height: 1.35; font-weight: 500; }
+  .skill .used { color: var(--dim); font-size: 11.5px; line-height: 1.45; }
+  @media (hover: hover) and (pointer: fine) {
+    .skill:hover { border-color: var(--rule-2); background: var(--pane-2); }
+    .skill:hover .skill-ico { color: var(--hot); box-shadow: 0 0 18px -2px rgb(var(--glow) / .55); transform: scale(1.06); }
+  }
+
+  /* ---------- contact ---------- */
+  .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(26px, 4vw, 56px); padding: clamp(24px, 4vw, 52px); align-items: center; }
+  .echo-cmd { color: var(--dim); font-size: 13.5px; overflow-wrap: anywhere; }
+  .echo-out {
+    margin: 10px 0 28px;
+    font-size: clamp(30px, 4.6vw, 58px); line-height: 1.08; font-weight: 700; font-stretch: 100%;
+    letter-spacing: -0.035em; color: var(--hot);
+  }
+  .contact-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .channels { display: grid; gap: 10px; }
+  .channel-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+  .channel {
+    display: grid; grid-template-columns: 40px minmax(0, 1fr) 18px; align-items: center; gap: 14px;
+    min-height: 64px; padding: 10px 16px 10px 12px;
+    border: 1px solid var(--rule); border-radius: var(--r-md);
+    background: color-mix(in srgb, var(--void) 50%, transparent);
+    color: var(--ink); text-decoration: none;
+    transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out);
+  }
+  .channel .go { transition: transform 200ms var(--ease-out), color 160ms var(--ease-out); }
+  .channel .ch-ico {
+    display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px;
+    background: var(--pane-2); color: var(--phos);
+  }
+  .channel .ch-ico .icon, .channel .ch-ico .logo { width: 18px; height: 18px; }
+  .channel .txt { display: grid; min-width: 0; }
+  .channel .lab { color: var(--amber); font-size: 11.5px; line-height: 1.4; }
+  .channel .val { color: var(--hot); overflow-wrap: anywhere; font-size: 14px; line-height: 1.45; }
+  .channel .go { color: var(--dim); }
+  .copy {
+    display: flex; align-items: center; gap: 8px;
+    padding: 0 16px;
+    border: 1px solid var(--rule); border-radius: var(--r-md);
+    background: color-mix(in srgb, var(--void) 50%, transparent);
+    color: var(--dim); font-size: 12.5px; cursor: pointer;
+    transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), transform 160ms var(--ease-out);
+  }
+  .copy:active { transform: scale(.96); }
+  .copy.done { color: var(--phos); border-color: var(--phos-2); }
+  @media (hover: hover) and (pointer: fine) {
+    .channel:hover { background: var(--pane-2); border-color: var(--phos-2); }
+    .channel:hover .go { color: var(--phos); transform: translate(2px, -2px); }
+    .copy:hover { color: var(--phos); background: var(--pane-2); border-color: var(--rule-2); }
+  }
+
+  /* =========================================================
+     footer
+     ========================================================= */
+  .foot { padding: 0 0 calc(20px + env(safe-area-inset-bottom, 0px)); }
+  .foot-bar {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px;
+    padding: 12px 14px 12px 12px;
+    border: 1px solid var(--rule); border-radius: var(--r-md);
+    background: color-mix(in srgb, var(--pane) 85%, transparent);
+    color: var(--dim); font-size: 12.5px;
+  }
+  .mode { padding: 3px 9px; border-radius: 7px; background: var(--phos); color: var(--void); font-weight: 700; }
+  .foot-r { margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; }
+  kbd { font: inherit; color: var(--ink); border: 1px solid var(--rule-2); border-radius: 5px; padding: 0 5px; }
+  .phos-switch { display: inline-flex; padding: 3px; gap: 2px; border: 1px solid var(--rule-2); border-radius: 999px; }
+  .phos-switch button { padding: 4px 11px; border: 0; border-radius: 999px; background: transparent; color: var(--dim); font-size: 12px; cursor: pointer; transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out); }
+  .phos-switch button[aria-pressed="true"] { background: var(--phos); color: var(--void); font-weight: 700; }
+
+  /* =========================================================
+     responsive
+     ========================================================= */
+  @media (max-width: 1080px) {
+    .bento-card.c-backend, .bento-card.c-ai, .bento-card.c-db,
+    .bento-card.c-front, .bento-card.c-tools, .bento-card.c-also { grid-column: span 12; }
+  }
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: minmax(0, 1fr); }
+    .stage { margin-top: 4px; }
+    .hacker { width: min(420px, 100%); }
+    .contact { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 760px) {
+    :root { --bar-h: 48px; --bar-top: 8px; }
+    .bar { width: calc(100% - 16px); }
+    .sec-head { grid-template-columns: auto minmax(0, 1fr); }
+    .about-copy { font-size: 16px; }
+    .facts { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .facts dd { margin-bottom: 10px; }
+    .log { padding-left: 30px; }
+    .log-rail { left: 5px; }
+    .node { left: -30px; width: 14px; height: 14px; }
+    .skills-list, .c-backend .skills-list { grid-template-columns: minmax(0, 1fr); }
+    .foot-r { margin-left: 0; }
+    .keys { display: none; }
+    .contact { padding: 24px 18px; }
+    .channel { grid-template-columns: minmax(0, 1fr) 18px; padding: 12px 14px; min-height: 60px; }
+    .channel .ch-ico { display: none; }
+    .channel .val { font-size: 13px; font-stretch: 80%; }
+    .copy { padding: 0 15px; }
+    .copy .copy-label { display: none; }
+  }
+  @media (max-width: 520px) {
+    .pj-grid.app { grid-template-columns: 1fr; }
+  }
+
+  /* =========================================================
+     reduced motion: fewer, gentler
+     ========================================================= */
+  @media (prefers-reduced-motion: reduce) {
+    .bar-open::before, .caret, .scroll-cue .track::after { animation: none !important; }
+    .btn:active, .copy:active { transform: none; }
+    .skip, .bar-ind { transition: none; }
+    .pj-card, .pj-shots img, .pj-shots .pj-ph { transition: none; }
+    #rain { opacity: .14; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <!-- Logos: Simple Icons (CC0). Icons: Lucide (ISC). -->
+  <symbol id="lu-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+  <symbol id="lu-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
+  <symbol id="lu-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="lu-component" viewBox="0 0 24 24"><path d="M15.536 11.293a1 1 0 0 0 0 1.414l2.376 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z"/><path d="M2.297 11.293a1 1 0 0 0 0 1.414l2.377 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414L6.088 8.916a1 1 0 0 0-1.414 0z"/><path d="M8.916 17.912a1 1 0 0 0 0 1.415l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.415l-2.377-2.376a1 1 0 0 0-1.414 0z"/><path d="M8.916 4.674a1 1 0 0 0 0 1.414l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z"/></symbol>
+  <symbol id="lu-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+  <symbol id="lu-cpu" viewBox="0 0 24 24"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></symbol>
+  <symbol id="lu-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
+  <symbol id="lu-git-compare" viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M11 18H8a2 2 0 0 1-2-2V9"/></symbol>
+  <symbol id="lu-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></symbol>
+  <symbol id="lu-key-round" viewBox="0 0 24 24"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5"/></symbol>
+  <symbol id="lu-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></symbol>
+  <symbol id="lu-layout-template" viewBox="0 0 24 24"><rect width="18" height="7" x="3" y="3" rx="1"/><rect width="9" height="7" x="3" y="14" rx="1"/><rect width="5" height="7" x="16" y="14" rx="1"/></symbol>
+  <symbol id="lu-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="lu-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></symbol>
+  <symbol id="lu-pause" viewBox="0 0 24 24"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></symbol>
+  <symbol id="lu-phone" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></symbol>
+  <symbol id="lu-scan-search" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/><path d="m16 16-1.9-1.9"/></symbol>
+  <symbol id="lu-server" viewBox="0 0 24 24"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></symbol>
+  <symbol id="lu-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="lu-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol>
+  <symbol id="lu-table-2" viewBox="0 0 24 24"><path d="M3 9h18"/><path d="M9 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/></symbol>
+  <symbol id="lu-webhook" viewBox="0 0 24 24"><path d="M18 16.98h-5.99c-1.1 0-1.95.94-2.48 1.9A4 4 0 0 1 2 17c.01-.7.2-1.4.57-2"/><path d="m6 17 3.13-5.78c.53-.97.1-2.18-.5-3.1a4 4 0 1 1 6.89-4.06"/><path d="m12 6 3.13 5.73C15.66 12.7 16.9 13 18 13a4 4 0 0 1 0 8"/></symbol>
+  <symbol id="lu-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></symbol>
+  <symbol id="si-bootstrap" viewBox="0 0 24 24"><path d="M11.77 11.24H9.956V8.202h2.152c1.17 0 1.834.522 1.834 1.466 0 1.008-.773 1.572-2.174 1.572zm.324 1.206H9.957v3.348h2.231c1.459 0 2.232-.585 2.232-1.685s-.795-1.663-2.326-1.663zM24 11.39v1.218c-1.128.108-1.817.944-2.226 2.268-.407 1.319-.463 2.937-.42 4.186.045 1.3-.968 2.5-2.337 2.5H4.985c-1.37 0-2.383-1.2-2.337-2.5.043-1.249-.013-2.867-.42-4.186-.41-1.324-1.1-2.16-2.228-2.268V11.39c1.128-.108 1.819-.944 2.227-2.268.408-1.319.464-2.937.42-4.186-.045-1.3.968-2.5 2.338-2.5h14.032c1.37 0 2.382 1.2 2.337 2.5-.043 1.249.013 2.867.42 4.186.409 1.324 1.098 2.16 2.226 2.268zm-7.927 2.817c0-1.354-.953-2.333-2.368-2.488v-.057c1.04-.169 1.856-1.135 1.856-2.213 0-1.537-1.213-2.538-3.062-2.538h-4.16v10.172h4.181c2.218 0 3.553-1.086 3.553-2.876z"/></symbol>
+  <symbol id="si-css" viewBox="0 0 24 24"><path d="M0 0v20.16A3.84 3.84 0 0 0 3.84 24h16.32A3.84 3.84 0 0 0 24 20.16V3.84A3.84 3.84 0 0 0 20.16 0Zm14.256 13.08c1.56 0 2.28 1.08 2.304 2.64h-1.608c.024-.288-.048-.6-.144-.84-.096-.192-.288-.264-.552-.264-.456 0-.696.264-.696.84-.024.576.288.888.768 1.08.72.288 1.608.744 1.92 1.296q.432.648.432 1.656c0 1.608-.912 2.592-2.496 2.592-1.656 0-2.4-1.032-2.424-2.688h1.68c0 .792.264 1.176.792 1.176.264 0 .456-.072.552-.24.192-.312.24-1.176-.048-1.512-.312-.408-.912-.6-1.32-.816q-.828-.396-1.224-.936c-.24-.36-.36-.888-.36-1.536 0-1.44.936-2.472 2.424-2.448m5.4 0c1.584 0 2.304 1.08 2.328 2.64h-1.608c0-.288-.048-.6-.168-.84-.096-.192-.264-.264-.528-.264-.48 0-.72.264-.72.84s.288.888.792 1.08c.696.288 1.608.744 1.92 1.296.264.432.408.984.408 1.656.024 1.608-.888 2.592-2.472 2.592-1.68 0-2.424-1.056-2.448-2.688h1.68c0 .744.264 1.176.792 1.176.264 0 .456-.072.552-.24.216-.312.264-1.176-.048-1.512-.288-.408-.888-.6-1.32-.816-.552-.264-.96-.576-1.2-.936s-.36-.888-.36-1.536c-.024-1.44.912-2.472 2.4-2.448m-11.031.018c.711-.006 1.419.198 1.839.63.432.432.672 1.128.648 1.992H9.336c.024-.456-.096-.792-.432-.96-.312-.144-.768-.048-.888.24-.12.264-.192.576-.168.864v3.504c0 .744.264 1.128.768 1.128a.65.65 0 0 0 .552-.264c.168-.24.192-.552.168-.84h1.776c.096 1.632-.984 2.712-2.568 2.688-1.536 0-2.496-.864-2.472-2.472v-4.032c0-.816.24-1.44.696-1.848.432-.408 1.146-.624 1.857-.63"/></symbol>
+  <symbol id="si-dart" viewBox="0 0 24 24"><path d="M4.105 4.105S9.158 1.58 11.684.316a3.079 3.079 0 0 1 1.481-.315c.766.047 1.677.788 1.677.788L24 9.948v9.789h-4.263V24H9.789l-9-9C.303 14.5 0 13.795 0 13.105c0-.319.18-.818.316-1.105l3.789-7.895zm.679.679v11.787c.002.543.021 1.024.498 1.508L10.204 23h8.533v-4.263L4.784 4.784zm12.055-.678c-.899-.896-1.809-1.78-2.74-2.643-.302-.267-.567-.468-1.07-.462-.37.014-.87.195-.87.195L6.341 4.105l10.498.001z"/></symbol>
+  <symbol id="si-docker" viewBox="0 0 24 24"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.184-.186h-2.12a.186.186 0 00-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 00-.75.748 11.376 11.376 0 00.692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 003.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/></symbol>
+  <symbol id="si-ejs" viewBox="0 0 24 24"><path d="m8.291 5.696-1.258-1.58 1.668-1.55 1.258 1.58-1.668 1.55zm2.34 2.048.205-1.55-5.412-.03-.204 1.55 3.945.022L7.8 17.852l-.839.77-.405-.004c.385.403.803.81 1.236 1.214l1.378-1.265 1.458-10.823h.004zm-6.757 7.254s2.925-.468 3.54.38c0 0-1.756-2.925-4.184-2.925 0-.074-.098-1.353 5.146-2.609l.206-1.53c-8.346 1.108-14.287 4.322.265 13.12 0 0-5.675-4.71-4.973-6.436zM13 6.223 11.216 7.86l-.526 4.037 1.316 1.638 5.675.058.556.702-.38 2.633-.713.685-.018.017h2.193l.556-4.037-1.345-1.638-5.646-.058-.556-.702.351-2.633.731-.702 5.032.058.556.673-.176 1.229h1.55l.264-1.902-1.317-1.667-6.318-.03zm2.882 11.908.545-.523-4.305-.035-.965-1.17-1.258 1.17 1.346 1.667 6.318.03 1.22-1.139h-2.901zM13.13 8.965a103.16 103.16 0 0 1 4.624-.554l-4.145-.048-.457.44-.022.162zm8.026-1.156-.025.179-.018.132c.92-.07 1.87-.139 2.887-.2 0 0-1.113-.067-2.844-.11zM1.914 18.392l1.404 1.784 2.66.02c-1.292-.875-2.393-1.708-3.296-2.499l-.768.695z"/></symbol>
+  <symbol id="si-express" viewBox="0 0 24 24"><path d="M12.262 16.666h1.146l6.975-9.325H19.22zm9.778 1.441v.004l-4.334-5.706-.557.74 4.873 6.682H.945V4.173h9.505l5.026 6.7.574-.772-4.374-5.928h.003l-.719-.945H0v17.544h24zM10.917 8.705a3.8 3.8 0 0 0-1.292-1.183q-.796-.45-1.916-.45c-.746 0-1.37.14-1.906.424a3.76 3.76 0 0 0-1.31 1.12 4.9 4.9 0 0 0-.75 1.581 7.17 7.17 0 0 0 0 3.696c.148.567.402 1.101.75 1.573a3.5 3.5 0 0 0 1.31 1.066q.803.39 1.906.389 1.77 0 2.739-.868.966-.867 1.328-2.457h-1.139q-.271 1.084-.977 1.734-.704.651-1.952.65-.812 0-1.392-.342a3.1 3.1 0 0 1-.957-.869 3.5 3.5 0 0 1-.551-1.182 5 5 0 0 1-.17-1.133 9 9 0 0 0-.015-.286 4.5 4.5 0 0 1 .015-.829c.047-.418.147-.83.296-1.223A3.7 3.7 0 0 1 5.54 9.05a2.9 2.9 0 0 1 .922-.742q.541-.28 1.246-.28c.47 0 .869.093 1.23.28q.541.281.922.742.379.461.587 1.057t.225 1.246H5.625l.004.957h6.182a7.3 7.3 0 0 0-.18-1.924 4.9 4.9 0 0 0-.715-1.68z"/></symbol>
+  <symbol id="si-firebase" viewBox="0 0 24 24"><path d="M19.455 8.369c-.538-.748-1.778-2.285-3.681-4.569-.826-.991-1.535-1.832-1.884-2.245a146 146 0 0 0-.488-.576l-.207-.245-.113-.133-.022-.032-.01-.005L12.57 0l-.609.488c-1.555 1.246-2.828 2.851-3.681 4.64-.523 1.064-.864 2.105-1.043 3.176-.047.241-.088.489-.121.738-.209-.017-.421-.028-.632-.033-.018-.001-.035-.002-.059-.003a7.46 7.46 0 0 0-2.28.274l-.317.089-.163.286c-.765 1.342-1.198 2.869-1.252 4.416-.07 2.01.477 3.954 1.583 5.625 1.082 1.633 2.61 2.882 4.42 3.611l.236.095.071.025.003-.001a9.59 9.59 0 0 0 2.941.568q.171.006.342.006c1.273 0 2.513-.249 3.69-.742l.008.004.313-.145a9.63 9.63 0 0 0 3.927-3.335c1.01-1.49 1.577-3.234 1.641-5.042.075-2.161-.643-4.304-2.133-6.371m-7.083 6.695c.328 1.244.264 2.44-.191 3.558-1.135-1.12-1.967-2.352-2.475-3.665-.543-1.404-.87-2.74-.974-3.975.48.157.922.366 1.315.622 1.132.737 1.914 1.902 2.325 3.461zm.207 6.022c.482.368.99.712 1.513 1.028-.771.21-1.565.302-2.369.273a8 8 0 0 1-.373-.022c.458-.394.869-.823 1.228-1.279zm1.347-6.431c-.516-1.957-1.527-3.437-3.002-4.398-.647-.421-1.385-.741-2.194-.95.011-.134.026-.268.043-.4.014-.113.03-.216.046-.313.133-.689.332-1.37.589-2.025.099-.25.206-.499.321-.74l.004-.008c.177-.358.376-.719.61-1.105l.092-.152-.003-.001c.544-.851 1.197-1.627 1.942-2.311l.288.341c.672.796 1.304 1.548 1.878 2.237 1.291 1.549 2.966 3.583 3.612 4.48 1.277 1.771 1.893 3.579 1.83 5.375-.049 1.395-.461 2.755-1.195 3.933-.694 1.116-1.661 2.05-2.8 2.708-.636-.318-1.559-.839-2.539-1.599.79-1.575.952-3.28.479-5.072zm-2.575 5.397c-.725.939-1.587 1.55-2.09 1.856-.081-.029-.163-.06-.243-.093l-.065-.026c-1.49-.616-2.747-1.656-3.635-3.01-.907-1.384-1.356-2.993-1.298-4.653.041-1.19.338-2.327.882-3.379.316-.07.638-.114.96-.131l.084-.002c.162-.003.324-.003.478 0 .227.011.454.035.677.07.073 1.513.445 3.145 1.105 4.852.637 1.644 1.694 3.162 3.144 4.515z"/></symbol>
+  <symbol id="si-flutter" viewBox="0 0 24 24"><path d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.357zm.014 11.072L7.857 17.53l6.47 6.47H21.7l-6.46-6.468 6.46-6.46h-7.37z"/></symbol>
+  <symbol id="si-git" viewBox="0 0 24 24"><path d="M13.09 23.549a1.54 1.54 0 0 1-2.18 0L.451 13.089a1.54 1.54 0 0 1 0-2.179l7.191-7.19 2.733 2.733a1.85 1.85 0 0 0 .964 2.326v6.66a1.849 1.849 0 1 0 1.54 0V8.957l2.508 2.508a1.85 1.85 0 1 0 1.09-1.09l-2.634-2.634a1.85 1.85 0 0 0-2.378-2.377L8.73 2.63 10.91.451a1.54 1.54 0 0 1 2.179 0l10.459 10.46a1.54 1.54 0 0 1 0 2.179z"/></symbol>
+  <symbol id="si-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+  <symbol id="si-google" viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></symbol>
+  <symbol id="si-html5" viewBox="0 0 24 24"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></symbol>
+  <symbol id="si-javascript" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/></symbol>
+  <symbol id="si-jquery" viewBox="0 0 24 24"><path d="M1.525 5.87c-2.126 3.054-1.862 7.026-.237 10.269.037.079.078.154.118.229.023.052.049.1.077.15.013.027.031.056.047.082.026.052.054.102.081.152l.157.266c.03.049.057.097.09.146.056.094.12.187.178.281.026.04.05.078.079.117a6.368 6.368 0 00.31.445c.078.107.156.211.24.315.027.038.058.076.086.115l.22.269c.028.03.055.067.084.099.098.118.202.233.306.35l.005.006a3.134 3.134 0 00.425.44c.08.083.16.165.245.245l.101.097c.111.105.223.209.34.309.002 0 .003.002.005.003l.057.05c.102.089.205.178.31.26l.125.105c.085.068.174.133.26.2l.137.105c.093.07.192.139.287.207.035.025.07.05.106.073l.03.023.28.185.12.08c.148.094.294.184.44.272.041.02.084.044.123.068.108.062.22.125.329.183.06.034.122.063.184.094.075.042.153.083.234.125a.324.324 0 01.056.023c.033.015.064.031.096.047.12.06.245.118.375.175.024.01.05.02.076.034.144.063.289.123.438.182.034.01.07.027.105.04.135.051.274.103.411.152l.05.018c.154.052.305.102.46.15.036.01.073.023.111.033.16.048.314.105.474.137 10.273 1.872 13.258-6.177 13.258-6.177-2.508 3.266-6.958 4.127-11.174 3.169-.156-.036-.312-.086-.47-.132a13.539 13.539 0 01-.567-.182l-.062-.024c-.136-.046-.267-.097-.4-.148a1.615 1.615 0 00-.11-.04c-.148-.06-.29-.121-.433-.184-.031-.01-.057-.024-.088-.036a23.44 23.44 0 01-.362-.17 1.485 1.485 0 01-.106-.052c-.094-.044-.188-.095-.28-.143a3.947 3.947 0 01-.187-.096c-.114-.06-.227-.125-.34-.187-.034-.024-.073-.044-.112-.066a15.922 15.922 0 01-.439-.27 2.107 2.107 0 01-.118-.078 6.01 6.01 0 01-.312-.207c-.035-.023-.067-.048-.103-.073a9.553 9.553 0 01-.295-.212c-.042-.034-.087-.066-.132-.1-.088-.07-.177-.135-.265-.208l-.118-.095a10.593 10.593 0 01-.335-.28.258.258 0 00-.037-.031l-.347-.316-.1-.094c-.082-.084-.166-.164-.25-.246l-.098-.1a9.081 9.081 0 01-.309-.323l-.015-.016c-.106-.116-.21-.235-.313-.355-.027-.03-.053-.064-.08-.097l-.227-.277a21.275 21.275 0 01-.34-.449C2.152 11.79 1.306 7.384 3.177 3.771m4.943-.473c-1.54 2.211-1.454 5.169-.254 7.508a9.111 9.111 0 00.678 1.133c.23.33.484.721.793.988.107.122.223.24.344.36l.09.09c.114.11.232.217.35.325l.016.013a9.867 9.867 0 00.414.342c.034.023.063.05.096.073.14.108.282.212.428.316l.015.009c.062.045.128.086.198.13.028.018.06.042.09.06.106.068.21.132.318.197.017.007.032.016.048.023.09.055.188.108.282.157.033.02.065.035.1.054.066.033.132.068.197.102l.032.014c.135.067.273.129.408.19.034.014.063.025.092.039.111.048.224.094.336.137.05.017.097.037.144.052.102.038.21.073.31.108l.14.045c.147.045.295.104.449.13C22.164 17.206 24 11.098 24 11.098c-1.653 2.38-4.852 3.513-8.261 2.628a8.04 8.04 0 01-.449-.13c-.048-.014-.09-.029-.136-.043-.104-.036-.211-.07-.312-.109l-.144-.054c-.113-.045-.227-.087-.336-.135-.034-.015-.065-.025-.091-.04-.14-.063-.281-.125-.418-.192l-.206-.107-.119-.06a5.673 5.673 0 01-.265-.15.62.62 0 01-.062-.035c-.106-.066-.217-.13-.318-.198-.034-.019-.065-.042-.097-.062l-.208-.136c-.144-.1-.285-.208-.428-.313-.032-.029-.063-.053-.094-.079-1.499-1.178-2.681-2.79-3.242-4.613-.59-1.897-.46-4.023.56-5.75m4.292-.147c-.909 1.334-.996 2.99-.37 4.46.665 1.563 2.024 2.79 3.608 3.37.065.025.128.046.196.07l.088.027c.092.03.185.063.28.084 4.381.845 5.567-2.25 5.886-2.704-1.043 1.498-2.792 1.857-4.938 1.335a4.85 4.85 0 01-.516-.16 6.352 6.352 0 01-.618-.254 6.53 6.53 0 01-1.082-.66c-1.922-1.457-3.113-4.236-1.859-6.5"/></symbol>
+  <symbol id="si-nodedotjs" viewBox="0 0 24 24"><path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z"/></symbol>
+  <symbol id="si-php" viewBox="0 0 24 24"><path d="M7.01 10.207h-.944l-.515 2.648h.838c.556 0 .97-.105 1.242-.314.272-.21.455-.559.55-1.049.092-.47.05-.802-.124-.995-.175-.193-.523-.29-1.047-.29zM12 5.688C5.373 5.688 0 8.514 0 12s5.373 6.313 12 6.313S24 15.486 24 12c0-3.486-5.373-6.312-12-6.312zm-3.26 7.451c-.261.25-.575.438-.917.551-.336.108-.765.164-1.285.164H5.357l-.327 1.681H3.652l1.23-6.326h2.65c.797 0 1.378.209 1.744.628.366.418.476 1.002.33 1.752a2.836 2.836 0 0 1-.305.847c-.143.255-.33.49-.561.703zm4.024.715l.543-2.799c.063-.318.039-.536-.068-.651-.107-.116-.336-.174-.687-.174H11.46l-.704 3.625H9.388l1.23-6.327h1.367l-.327 1.682h1.218c.767 0 1.295.134 1.586.401s.378.7.263 1.299l-.572 2.944h-1.389zm7.597-2.265a2.782 2.782 0 0 1-.305.847c-.143.255-.33.49-.561.703a2.44 2.44 0 0 1-.917.551c-.336.108-.765.164-1.286.164h-1.18l-.327 1.682h-1.378l1.23-6.326h2.649c.797 0 1.378.209 1.744.628.366.417.477 1.001.331 1.751zM17.766 10.207h-.943l-.516 2.648h.838c.557 0 .971-.105 1.242-.314.272-.21.455-.559.551-1.049.092-.47.049-.802-.125-.995s-.524-.29-1.047-.29z"/></symbol>
+  <symbol id="si-postgresql" viewBox="0 0 24 24"><path d="M23.5594 14.7228a.5269.5269 0 0 0-.0563-.1191c-.139-.2632-.4768-.3418-1.0074-.2321-1.6533.3411-2.2935.1312-2.5256-.0191 1.342-2.0482 2.445-4.522 3.0411-6.8297.2714-1.0507.7982-3.5237.1222-4.7316a1.5641 1.5641 0 0 0-.1509-.235C21.6931.9086 19.8007.0248 17.5099.0005c-1.4947-.0158-2.7705.3461-3.1161.4794a9.449 9.449 0 0 0-.5159-.0816 8.044 8.044 0 0 0-1.3114-.1278c-1.1822-.0184-2.2038.2642-3.0498.8406-.8573-.3211-4.7888-1.645-7.2219.0788C.9359 2.1526.3086 3.8733.4302 6.3043c.0409.818.5069 3.334 1.2423 5.7436.4598 1.5065.9387 2.7019 1.4334 3.582.553.9942 1.1259 1.5933 1.7143 1.7895.4474.1491 1.1327.1441 1.8581-.7279.8012-.9635 1.5903-1.8258 1.9446-2.2069.4351.2355.9064.3625 1.39.3772a.0569.0569 0 0 0 .0004.0041 11.0312 11.0312 0 0 0-.2472.3054c-.3389.4302-.4094.5197-1.5002.7443-.3102.064-1.1344.2339-1.1464.8115-.0025.1224.0329.2309.0919.3268.2269.4231.9216.6097 1.015.6331 1.3345.3335 2.5044.092 3.3714-.6787-.017 2.231.0775 4.4174.3454 5.0874.2212.5529.7618 1.9045 2.4692 1.9043.2505 0 .5263-.0291.8296-.0941 1.7819-.3821 2.5557-1.1696 2.855-2.9059.1503-.8707.4016-2.8753.5388-4.1012.0169-.0703.0357-.1207.057-.1362.0007-.0005.0697-.0471.4272.0307a.3673.3673 0 0 0 .0443.0068l.2539.0223.0149.001c.8468.0384 1.9114-.1426 2.5312-.4308.6438-.2988 1.8057-1.0323 1.5951-1.6698zM2.371 11.8765c-.7435-2.4358-1.1779-4.8851-1.2123-5.5719-.1086-2.1714.4171-3.6829 1.5623-4.4927 1.8367-1.2986 4.8398-.5408 6.108-.13-.0032.0032-.0066.0061-.0098.0094-2.0238 2.044-1.9758 5.536-1.9708 5.7495-.0002.0823.0066.1989.0162.3593.0348.5873.0996 1.6804-.0735 2.9184-.1609 1.1504.1937 2.2764.9728 3.0892.0806.0841.1648.1631.2518.2374-.3468.3714-1.1004 1.1926-1.9025 2.1576-.5677.6825-.9597.5517-1.0886.5087-.3919-.1307-.813-.5871-1.2381-1.3223-.4796-.839-.9635-2.0317-1.4155-3.5126zm6.0072 5.0871c-.1711-.0428-.3271-.1132-.4322-.1772.0889-.0394.2374-.0902.4833-.1409 1.2833-.2641 1.4815-.4506 1.9143-1.0002.0992-.126.2116-.2687.3673-.4426a.3549.3549 0 0 0 .0737-.1298c.1708-.1513.2724-.1099.4369-.0417.156.0646.3078.26.3695.4752.0291.1016.0619.2945-.0452.4444-.9043 1.2658-2.2216 1.2494-3.1676 1.0128zm2.094-3.988-.0525.141c-.133.3566-.2567.6881-.3334 1.003-.6674-.0021-1.3168-.2872-1.8105-.8024-.6279-.6551-.9131-1.5664-.7825-2.5004.1828-1.3079.1153-2.4468.079-3.0586-.005-.0857-.0095-.1607-.0122-.2199.2957-.2621 1.6659-.9962 2.6429-.7724.4459.1022.7176.4057.8305.928.5846 2.7038.0774 3.8307-.3302 4.7363-.084.1866-.1633.3629-.2311.5454zm7.3637 4.5725c-.0169.1768-.0358.376-.0618.5959l-.146.4383a.3547.3547 0 0 0-.0182.1077c-.0059.4747-.054.6489-.115.8693-.0634.2292-.1353.4891-.1794 1.0575-.11 1.4143-.8782 2.2267-2.4172 2.5565-1.5155.3251-1.7843-.4968-2.0212-1.2217a6.5824 6.5824 0 0 0-.0769-.2266c-.2154-.5858-.1911-1.4119-.1574-2.5551.0165-.5612-.0249-1.9013-.3302-2.6462.0044-.2932.0106-.5909.019-.8918a.3529.3529 0 0 0-.0153-.1126 1.4927 1.4927 0 0 0-.0439-.208c-.1226-.4283-.4213-.7866-.7797-.9351-.1424-.059-.4038-.1672-.7178-.0869.067-.276.1831-.5875.309-.9249l.0529-.142c.0595-.16.134-.3257.213-.5012.4265-.9476 1.0106-2.2453.3766-5.1772-.2374-1.0981-1.0304-1.6343-2.2324-1.5098-.7207.0746-1.3799.3654-1.7088.5321a5.6716 5.6716 0 0 0-.1958.1041c.0918-1.1064.4386-3.1741 1.7357-4.4823a4.0306 4.0306 0 0 1 .3033-.276.3532.3532 0 0 0 .1447-.0644c.7524-.5706 1.6945-.8506 2.802-.8325.4091.0067.8017.0339 1.1742.081 1.939.3544 3.2439 1.4468 4.0359 2.3827.8143.9623 1.2552 1.9315 1.4312 2.4543-1.3232-.1346-2.2234.1268-2.6797.779-.9926 1.4189.543 4.1729 1.2811 5.4964.1353.2426.2522.4522.2889.5413.2403.5825.5515.9713.7787 1.2552.0696.087.1372.1714.1885.245-.4008.1155-1.1208.3825-1.0552 1.717-.0123.1563-.0423.4469-.0834.8148-.0461.2077-.0702.4603-.0994.7662zm.8905-1.6211c-.0405-.8316.2691-.9185.5967-1.0105a2.8566 2.8566 0 0 0 .135-.0406 1.202 1.202 0 0 0 .1342.103c.5703.3765 1.5823.4213 3.0068.1344-.2016.1769-.5189.3994-.9533.6011-.4098.1903-1.0957.333-1.7473.3636-.7197.0336-1.0859-.0807-1.1721-.151zm.5695-9.2712c-.0059.3508-.0542.6692-.1054 1.0017-.055.3576-.112.7274-.1264 1.1762-.0142.4368.0404.8909.0932 1.3301.1066.887.216 1.8003-.2075 2.7014a3.5272 3.5272 0 0 1-.1876-.3856c-.0527-.1276-.1669-.3326-.3251-.6162-.6156-1.1041-2.0574-3.6896-1.3193-4.7446.3795-.5427 1.3408-.5661 2.1781-.463zm.2284 7.0137a12.3762 12.3762 0 0 0-.0853-.1074l-.0355-.0444c.7262-1.1995.5842-2.3862.4578-3.4385-.0519-.4318-.1009-.8396-.0885-1.2226.0129-.4061.0666-.7543.1185-1.0911.0639-.415.1288-.8443.1109-1.3505.0134-.0531.0188-.1158.0118-.1902-.0457-.4855-.5999-1.938-1.7294-3.253-.6076-.7073-1.4896-1.4972-2.6889-2.0395.5251-.1066 1.2328-.2035 2.0244-.1859 2.0515.0456 3.6746.8135 4.8242 2.2824a.908.908 0 0 1 .0667.1002c.7231 1.3556-.2762 6.2751-2.9867 10.5405zm-8.8166-6.1162c-.025.1794-.3089.4225-.6211.4225a.5821.5821 0 0 1-.0809-.0056c-.1873-.026-.3765-.144-.5059-.3156-.0458-.0605-.1203-.178-.1055-.2844.0055-.0401.0261-.0985.0925-.1488.1182-.0894.3518-.1226.6096-.0867.3163.0441.6426.1938.6113.4186zm7.9305-.4114c.0111.0792-.049.201-.1531.3102-.0683.0717-.212.1961-.4079.2232a.5456.5456 0 0 1-.075.0052c-.2935 0-.5414-.2344-.5607-.3717-.024-.1765.2641-.3106.5611-.352.297-.0414.6111.0088.6356.1851z"/></symbol>
+  <symbol id="si-react" viewBox="0 0 24 24"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"/></symbol>
+  <symbol id="si-tailwindcss" viewBox="0 0 24 24"><path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z"/></symbol>
+  <symbol id="si-vuedotjs" viewBox="0 0 24 24"><path d="M24,1.61H14.06L12,5.16,9.94,1.61H0L12,22.39ZM12,14.08,5.16,2.23H9.59L12,6.41l2.41-4.18h4.43Z"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="rain" aria-hidden="true"></canvas>
+<div class="crt" aria-hidden="true"></div>
+
+<header class="bar">
+  <a class="bar-session" href="#hero" aria-label="Ahmed Hossam, back to top">[ahmed]</a>
+  <nav class="bar-tabs" aria-label="Main">
+    <span class="bar-ind" aria-hidden="true"></span>
+    <a class="bar-tab" href="#hero" aria-current="true"><span class="n" aria-hidden="true">0:</span>home</a>
+    <a class="bar-tab" href="#about"><span class="n" aria-hidden="true">1:</span>about</a>
+    <a class="bar-tab" href="#experience"><span class="n" aria-hidden="true">2:</span>experience</a>
+    <a class="bar-tab" href="#projects"><span class="n" aria-hidden="true">3:</span>projects</a>
+    <a class="bar-tab" href="#volunteering"><span class="n" aria-hidden="true">4:</span>volunteering</a>
+    <a class="bar-tab" href="#skills"><span class="n" aria-hidden="true">5:</span>stack</a>
+    <a class="bar-tab" href="#contact"><span class="n" aria-hidden="true">6:</span>contact</a>
+  </nav>
+  <div class="bar-meta">
+    <span class="bar-open">open to backend roles</span>
+    <span class="bar-clock">Alexandria</span>
+    <span class="bar-scroll" aria-hidden="true">Top</span>
+  </div>
+  <span class="bar-progress" aria-hidden="true"></span>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- ===================== hero ===================== -->
+  <section id="hero" class="hero" tabindex="-1" aria-label="Introduction">
+    <div class="hero-inner">
+      <div class="hero-top">
+        <p class="hero-cmd" data-boot><span class="ps">$</span> <span class="typed">whoami</span></p>
+        <h1 class="name"><span class="name-text">Ahmed Hossam</span><canvas class="name-canvas" aria-hidden="true"></canvas></h1>
+      </div>
+
+      <div class="wrap hero-grid">
+        <div class="hero-left">
+          <p class="hero-role" data-boot><span class="gt" aria-hidden="true">&gt;</span> <span data-scramble>Backend Engineer</span> · <span class="nw" data-scramble>Node.js · Express · PostgreSQL</span></p>
+          <div class="hero-notes">
+            <p data-boot><span class="cm" aria-hidden="true">//</span> <span data-scramble>building scalable APIs and reviewing AI-written code.</span></p>
+            <p data-boot><span class="cm" aria-hidden="true">//</span> <span data-scramble>status: military service completed | Alexandria, Egypt</span></p>
+          </div>
+          <div class="hero-cta" data-boot>
+            <a class="btn btn--primary" href="#projects">view projects</a>
+            <a class="btn" href="https://github.com/AhmedHossamEissa1" target="_blank" rel="noopener"><svg class="logo" aria-hidden="true"><use href="#si-github"/></svg>github</a>
+            <a class="btn" href="mailto:ahmedhossameissa25@gmail.com"><svg class="icon" aria-hidden="true"><use href="#lu-mail"/></svg>hire me</a>
+          </div>
+        </div>
+
+        <div class="stage">
+          <figure class="hacker" data-boot aria-hidden="true"><canvas id="hacker-canvas"></canvas></figure>
+        </div>
+      </div>
+    </div>
+    <a class="scroll-cue js-only" href="#about" aria-label="Scroll to about"><span aria-hidden="true">scroll</span><span class="track" aria-hidden="true"></span></a>
+  </section>
+
+  <!-- ===================== about ===================== -->
+  <section id="about" class="sec" tabindex="-1" aria-labelledby="h-about">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-num" aria-hidden="true">01</span>
+        <h2 id="h-about" class="sec-cmd"><span class="sr-only">About</span><span aria-hidden="true"><span class="ps">$</span> <span class="typed">About</span></span></h2>
+        <span class="sec-rule" aria-hidden="true"></span>
+      </header>
+
+      <p class="about-copy">Backend Engineer with strong experience in Node.js and building scalable server-side applications. Through AI-focused engineering projects, I review high-quality backend and frontend code, debug complex issues, and evaluate code by comparing multiple solutions to find the most efficient and maintainable approach.</p>
+
+      <div class="panel fetch fetch-panel">
+        <dl class="facts">
+          <dt>Role</dt><dd>Backend Engineer</dd>
+          <dt>Stack</dt><dd>Node.js, Express, PostgreSQL</dd>
+          <dt>Education</dt><dd>B.Sc. Computer &amp; Communication Engineering, Faculty of Engineering, Alexandria University (2020 – 2025)</dd>
+          <dt>GPA</dt><dd><b data-count>3.54</b>/4.0</dd>
+          <dt>AI evaluations</dt><dd><b data-count>300+</b> AI evaluation tasks</dd>
+          <dt>Experience</dt><dd><b data-count>3</b> internships &amp; roles</dd>
+          <dt>Military service</dt><dd>completed</dd>
+          <dt>Location</dt><dd>Alexandria, Egypt</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== experience ===================== -->
+  <section id="experience" class="sec" tabindex="-1" aria-labelledby="h-exp">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-num" aria-hidden="true">02</span>
+        <h2 id="h-exp" class="sec-cmd"><span class="sr-only">Experience</span><span aria-hidden="true"><span class="ps">$</span> <span class="typed">Experience</span></span></h2>
+        <span class="sec-rule" aria-hidden="true"></span>
+      </header>
+
+      <div class="log">
+        <span class="log-rail" aria-hidden="true"><span class="log-fill"></span></span>
+        <ol class="commits">
+          <li class="commit">
+            <span class="node" aria-hidden="true"></span>
+            <div class="panel commit-card">
+              <div class="commit-head">
+                <h3 class="commit-title">AI Code Evaluator · Outlier</h3>
+                <div class="commit-meta"><span class="tag"><svg class="icon" aria-hidden="true"><use href="#lu-scan-search"/></svg>AI Evaluation</span><p class="commit-date">November 2024 – Present</p></div>
+              </div>
+              <ul>
+                <li>Completed 300+ AI evaluation tasks involving code review, debugging, and solution comparison.</li>
+                <li>Evaluated AI-generated backend and frontend code, comparing implementations on correctness, code quality, and adherence to prompt requirements.</li>
+                <li>Reviewed Node.js backend applications to find bugs, logic errors, and incomplete implementations.</li>
+                <li>Debugged and improved React.js and Node.js projects, validating behavior against expected outputs and test cases.</li>
+                <li>Assessed model responses for instruction following, flagging code that missed explicit or implicit requirements.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="commit">
+            <span class="node" aria-hidden="true"></span>
+            <div class="panel commit-card">
+              <div class="commit-head">
+                <h3 class="commit-title">Backend Developer Intern · TeknoSoft</h3>
+                <div class="commit-meta"><span class="tag"><svg class="icon" aria-hidden="true"><use href="#lu-server"/></svg>Backend</span><p class="commit-date">March 2024 – May 2024</p></div>
+              </div>
+              <ul>
+                <li>Built server-side applications with Node.js and Express.js: routing, middleware, and RESTful API endpoints.</li>
+                <li>Developed an authentication app with registration, login, Google Sign-In, and protected user resources.</li>
+                <li>Built a To-Do List app where authenticated users create and persist their own tasks (Node.js, Express.js, PostgreSQL).</li>
+                <li>Designed and queried relational databases in SQL and PostgreSQL with user-specific data storage.</li>
+                <li>Connected backend features to web interfaces using EJS and jQuery.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="commit">
+            <span class="node" aria-hidden="true"></span>
+            <div class="panel commit-card">
+              <div class="commit-head">
+                <h3 class="commit-title">Frontend Developer Intern · RMZTECH</h3>
+                <div class="commit-meta"><span class="tag"><svg class="icon" aria-hidden="true"><use href="#lu-layout-template"/></svg>Frontend</span><p class="commit-date">August 2023 – September 2023</p></div>
+              </div>
+              <ul>
+                <li>Built Quoraa, a fully responsive web app from scratch with Vue.js and Tailwind CSS using reusable components.</li>
+                <li>Developed interfaces with HTML, CSS, and JavaScript, using Bootstrap and Tailwind CSS.</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== projects ===================== -->
+  <section id="projects" class="sec" tabindex="-1" aria-labelledby="h-proj">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-num" aria-hidden="true">03</span>
+        <h2 id="h-proj" class="sec-cmd"><span class="sr-only">Projects</span><span aria-hidden="true"><span class="ps">$</span> <span class="typed">Projects</span></span></h2>
+        <span class="sec-rule" aria-hidden="true"></span>
+      </header>
+
+      <div class="pj">
+        <p class="pj-sub">Websites</p>
+        <div class="pj-grid web" id="gw"></div>
+        <p class="pj-sub">Mobile Apps</p>
+        <div class="pj-grid app" id="ga"></div>
+        <noscript><p class="pj-sub">Projects need JavaScript. See them all on <a href="https://github.com/AhmedHossamEissa1">GitHub</a>.</p></noscript>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== volunteering ===================== -->
+  <section id="volunteering" class="sec" tabindex="-1" aria-labelledby="h-vol">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-num" aria-hidden="true">04</span>
+        <h2 id="h-vol" class="sec-cmd"><span class="sr-only">Volunteering</span><span aria-hidden="true"><span class="ps">$</span> <span class="typed">Volunteering</span></span></h2>
+        <span class="sec-rule" aria-hidden="true"></span>
+      </header>
+
+      <div class="vol">
+        <div class="panel commit-card">
+          <div class="commit-head">
+            <h3 class="commit-title">Technical Volunteer · Semi Colon Team</h3>
+            <div class="commit-meta"><span class="tag"><svg class="icon" aria-hidden="true"><use href="#lu-cpu"/></svg>Embedded Systems</span><p class="commit-date">September 2022 – November 2022</p></div>
+          </div>
+          <ul>
+            <li>Completed a technical training program in Embedded Systems: microcontrollers, hardware interfacing, and embedded programming.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== skills ===================== -->
+  <section id="skills" class="sec" tabindex="-1" aria-labelledby="h-skills">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-num" aria-hidden="true">05</span>
+        <h2 id="h-skills" class="sec-cmd"><span class="sr-only">Stack</span><span aria-hidden="true"><span class="ps">$</span> <span class="typed">Stack</span></span></h2>
+        <span class="sec-rule" aria-hidden="true"></span>
+      </header>
+
+      <div class="bento">
+        <div class="panel bento-card c-backend">
+          <div class="card-head"><span class="card-ico"><svg class="icon" aria-hidden="true"><use href="#lu-server"/></svg></span><h3>Backend</h3><span class="count" aria-hidden="true">5 skills</span></div>
+          <p class="card-note">APIs, auth and the server logic behind them.</p>
+          <ul class="skills-list">
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-nodedotjs"/></svg></span><span class="nm">Node.js</span><span class="used">Outlier, TeknoSoft, Deep Fake Audios</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-express"/></svg></span><span class="nm">Express.js</span><span class="used">TeknoSoft</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="icon" aria-hidden="true"><use href="#lu-webhook"/></svg></span><span class="nm">RESTful APIs</span><span class="used">TeknoSoft, Bookly, News App</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="icon" aria-hidden="true"><use href="#lu-shield-check"/></svg></span><span class="nm">Authentication &amp; Authorization</span><span class="used">TeknoSoft, Chat App</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="icon" aria-hidden="true"><use href="#lu-key-round"/></svg></span><span class="nm">OAuth 2.0</span><span class="used">TeknoSoft (Google Sign-In)</span></li>
+          </ul>
+        </div>
+
+        <div class="panel bento-card c-ai">
+          <div class="card-head"><span class="card-ico"><svg class="icon" aria-hidden="true"><use href="#lu-brain-circuit"/></svg></span><h3>AI Evaluation</h3><span class="count" aria-hidden="true">2 skills</span></div>
+          <p class="card-note">Reviewing and comparing AI-written code at Outlier.</p>
+          <ul class="skills-list">
+            <li class="skill"><span class="skill-ico"><svg class="icon" aria-hidden="true"><use href="#lu-brain-circuit"/></svg></span><span class="nm">LLMs</span><span class="used">Outlier, 300+ evaluations</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="icon" aria-hidden="true"><use href="#lu-git-compare"/></svg></span><span class="nm">Code Preference Evaluation</span><span class="used">Outlier</span></li>
+          </ul>
+        </div>
+
+        <div class="panel bento-card c-db">
+          <div class="card-head"><span class="card-ico"><svg class="icon" aria-hidden="true"><use href="#lu-database"/></svg></span><h3>Databases</h3><span class="count" aria-hidden="true">3 skills</span></div>
+          <ul class="skills-list">
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-postgresql"/></svg></span><span class="nm">PostgreSQL</span><span class="used">TeknoSoft</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="icon" aria-hidden="true"><use href="#lu-database"/></svg></span><span class="nm">SQL</span><span class="used">TeknoSoft, Car Rental, Deep Fake Audios</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="icon" aria-hidden="true"><use href="#lu-table-2"/></svg></span><span class="nm">Relational Databases</span><span class="used">TeknoSoft, Car Rental</span></li>
+          </ul>
+        </div>
+
+        <div class="panel bento-card c-front">
+          <div class="card-head"><span class="card-ico"><svg class="icon" aria-hidden="true"><use href="#lu-smartphone"/></svg></span><h3>Frontend &amp; Mobile</h3><span class="count" aria-hidden="true">6 skills</span></div>
+          <ul class="skills-list">
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-javascript"/></svg></span><span class="nm">JavaScript (ES6+)</span><span class="used">RMZTECH, Car Rental</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-html5"/></svg></span><span class="nm">HTML5</span><span class="used">RMZTECH, Car Rental</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-css"/></svg></span><span class="nm">CSS3</span><span class="used">RMZTECH, Car Rental</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-ejs"/></svg></span><span class="nm">EJS</span><span class="used">TeknoSoft</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-jquery"/></svg></span><span class="nm">jQuery</span><span class="used">TeknoSoft</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-flutter"/></svg></span><span class="nm">Flutter</span><span class="used">Deep Fake Audios + 5 apps</span></li>
+          </ul>
+        </div>
+
+        <div class="panel bento-card c-tools">
+          <div class="card-head"><span class="card-ico"><svg class="icon" aria-hidden="true"><use href="#lu-wrench"/></svg></span><h3>Tools</h3><span class="count" aria-hidden="true">3 skills</span></div>
+          <ul class="skills-list">
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-git"/></svg></span><span class="nm">Git</span><span class="used">version control</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-github"/></svg></span><span class="nm">GitHub</span><span class="used">all 7 projects</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-docker"/></svg></span><span class="nm">Docker</span><span class="used">containers</span></li>
+          </ul>
+        </div>
+
+        <div class="panel bento-card c-also">
+          <div class="card-head"><span class="card-ico"><svg class="icon" aria-hidden="true"><use href="#lu-layers"/></svg></span><h3>Also worked with</h3><span class="count" aria-hidden="true">7 skills</span></div>
+          <p class="card-note">Picked up across the roles and projects above.</p>
+          <ul class="skills-list">
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-react"/></svg></span><span class="nm">React.js</span><span class="used">Outlier, Deep Fake Audios</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-vuedotjs"/></svg></span><span class="nm">Vue.js</span><span class="used">RMZTECH (Quoraa), Car Rental</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-dart"/></svg></span><span class="nm">Dart</span><span class="used">5 Flutter apps</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-firebase"/></svg></span><span class="nm">Firebase</span><span class="used">Chat App</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-tailwindcss"/></svg></span><span class="nm">Tailwind CSS</span><span class="used">RMZTECH</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-bootstrap"/></svg></span><span class="nm">Bootstrap</span><span class="used">RMZTECH</span></li>
+            <li class="skill"><span class="skill-ico"><svg class="logo" aria-hidden="true"><use href="#si-php"/></svg></span><span class="nm">PHP</span><span class="used">Car Rental</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== contact ===================== -->
+  <section id="contact" class="sec" tabindex="-1" aria-labelledby="h-contact">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="sec-num" aria-hidden="true">06</span>
+        <h2 id="h-contact" class="sec-cmd"><span class="sr-only">Contact</span><span aria-hidden="true"><span class="ps">$</span> <span class="typed">Contact</span></span></h2>
+        <span class="sec-rule" aria-hidden="true"></span>
+      </header>
+
+      <div class="panel contact">
+        <div class="contact-copy">
+          <p class="echo-cmd" aria-hidden="true"><span class="ps">$</span> echo "Open to backend roles. Let’s build something."</p>
+          <p class="echo-out">Open to backend roles. Let’s build something.</p>
+          <div class="contact-cta">
+            <a class="btn btn--primary" href="mailto:ahmedhossameissa25@gmail.com"><svg class="icon" aria-hidden="true"><use href="#lu-mail"/></svg>hire me</a>
+            <a class="btn" href="https://www.linkedin.com/in/ahmed-hossam-a426aa2b1/" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#lu-linkedin"/></svg>linkedin</a>
+          </div>
+        </div>
+        <div class="channels">
+          <div class="channel-row">
+            <a class="channel" href="mailto:ahmedhossameissa25@gmail.com"><span class="ch-ico"><svg class="icon" aria-hidden="true"><use href="#lu-mail"/></svg></span><span class="txt"><span class="lab">mail</span><span class="val">ahmedhossameissa25@gmail.com</span></span><span></span></a>
+            <button type="button" class="copy" data-copy="ahmedhossameissa25@gmail.com" aria-label="Copy email address"><svg class="icon" aria-hidden="true"><use href="#lu-copy"/></svg><span class="copy-label">copy</span></button>
+          </div>
+          <a class="channel" href="tel:+201060919723"><span class="ch-ico"><svg class="icon" aria-hidden="true"><use href="#lu-phone"/></svg></span><span class="txt"><span class="lab">phone</span><span class="val">+20 106 091 9723</span></span><span></span></a>
+          <a class="channel" href="https://www.linkedin.com/in/ahmed-hossam-a426aa2b1/" target="_blank" rel="noopener"><span class="ch-ico"><svg class="icon" aria-hidden="true"><use href="#lu-linkedin"/></svg></span><span class="txt"><span class="lab">linkedin</span><span class="val">in/ahmed-hossam-a426aa2b1</span></span><svg class="icon go" aria-hidden="true"><use href="#lu-arrow-up-right"/></svg></a>
+          <a class="channel" href="https://github.com/AhmedHossamEissa1" target="_blank" rel="noopener"><span class="ch-ico"><svg class="logo" aria-hidden="true"><use href="#si-github"/></svg></span><span class="txt"><span class="lab">github</span><span class="val">AhmedHossamEissa1</span></span><svg class="icon go" aria-hidden="true"><use href="#lu-arrow-up-right"/></svg></a>
+        </div>
+      </div>
+      <p class="sr-only" role="status" aria-live="polite" id="live"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-bar">
+    <span class="mode" aria-hidden="true">NORMAL</span>
+    <span>© <span data-year>2026</span> Ahmed Hossam · Alexandria, Egypt</span>
+    <div class="foot-r">
+      <span class="keys js-only">press <kbd>0</kbd>–<kbd>6</kbd> to jump between sections</span>
+      <div class="phos-switch js-only" role="group" aria-label="Phosphor color">
+        <button type="button" data-theme="green" aria-pressed="true">green</button>
+        <button type="button" data-theme="amber" aria-pressed="false">amber</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrambleTextPlugin.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  'use strict';
+  const root = document.documentElement;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const G = window.gsap || null;
+  const ST = G && window.ScrollTrigger ? window.ScrollTrigger : null;
+  const SCR = G && window.ScrambleTextPlugin ? window.ScrambleTextPlugin : null;
+  const SPLIT = G && window.SplitText ? window.SplitText : null;
+  if (G) G.registerPlugin(...[ST, SCR, SPLIT].filter(Boolean));
+  const willBoot = root.classList.contains('booting') && !!G && !reduce;
+  if (!willBoot) root.classList.remove('booting');
+
+  /* ---------- phosphor colors ---------- */
+  let C = {};
+  const toRgb = hex => {
+    let h = hex.replace('#', '');
+    if (h.length === 3) h = h.split('').map(c => c + c).join('');
+    const n = parseInt(h, 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255].join(',');
+  };
+  function readColors() {
+    const s = getComputedStyle(root);
+    const v = k => s.getPropertyValue(k).trim();
+    C = { phos: v('--phos'), hot: v('--hot'), void: v('--void'), voidRgb: toRgb(v('--void')), glow: v('--glow').split(/[\s,]+/).join(',') };
+    const arr = k => toRgb(v(k)).split(',').map(Number);
+    C.phosA = arr('--phos'); C.hotA = arr('--hot'); C.clothA = arr('--cloth-1'); C.foldA = arr('--cloth-fold'); C.phosRgb = toRgb(v('--phos'));
+  }
+  const onTheme = [];
+  function setTheme(name) {
+    const amber = name === 'amber';
+    if (amber) root.setAttribute('data-phosphor', 'amber'); else root.removeAttribute('data-phosphor');
+    try { localStorage.setItem('phosphor', amber ? 'amber' : 'green'); } catch (e) {}
+    readColors();
+    onTheme.forEach(f => f());
+    $$('[data-theme]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.theme === (amber ? 'amber' : 'green'))));
+    const meta = $('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', C.void);
+  }
+  readColors();
+  $$('[data-theme]').forEach(b => b.addEventListener('click', () => setTheme(b.dataset.theme)));
+  $$('[data-theme]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.theme === (root.getAttribute('data-phosphor') === 'amber' ? 'amber' : 'green'))));
+
+  /* ---------- pointer ---------- */
+  const ptr = { x: -1e4, y: -1e4, on: false };
+  if (fine) {
+    addEventListener('pointermove', e => { ptr.x = e.clientX; ptr.y = e.clientY; ptr.on = true; }, { passive: true });
+    addEventListener('pointerout', e => { if (!e.relatedTarget) ptr.on = false; });
+    addEventListener('blur', () => { ptr.on = false; });
+  }
+
+  /* ---------- smooth scroll + section navigation ---------- */
+  let lenis = null;
+  if (window.Lenis && !reduce) {
+    try {
+      lenis = new window.Lenis({ lerp: 0.11, smoothWheel: true });
+      if (G) {
+        if (ST) lenis.on('scroll', ST.update);
+        G.ticker.add(t => lenis.raf(t * 1000));
+        G.ticker.lagSmoothing(0);
+      } else {
+        const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+        requestAnimationFrame(raf);
+      }
+    } catch (e) { lenis = null; }
+  }
+  const bar = $('.bar');
+  const headRoom = () => bar.getBoundingClientRect().bottom + 16;
+  function go(hash, focus = true) {
+    const el = $(hash);
+    if (!el) return;
+    const isTop = hash === '#hero' || hash === '#main';
+    const offset = isTop ? 0 : -headRoom() + 24;
+    if (lenis) lenis.scrollTo(isTop ? 0 : el, { offset, duration: 1.2 });
+    else window.scrollTo({ top: isTop ? 0 : Math.max(0, el.getBoundingClientRect().top + scrollY + offset), behavior: reduce ? 'auto' : 'smooth' });
+    try { history.replaceState(null, '', hash); } catch (e) {}
+    if (focus) el.focus({ preventScroll: true });
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const hash = a.getAttribute('href');
+    if (hash.length < 2 || !$(hash)) return;
+    e.preventDefault();
+    go(hash);
+  });
+
+  const ORDER = ['#hero', '#about', '#experience', '#projects', '#volunteering', '#skills', '#contact'];
+  const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  let kIdx = 0;
+  document.addEventListener('keydown', e => {
+    kIdx = e.key === KONAMI[kIdx] ? kIdx + 1 : (e.key === KONAMI[0] ? 1 : 0);
+    if (kIdx === KONAMI.length) { kIdx = 0; matrixMode(); }
+    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+    if (/^[0-6]$/.test(e.key)) { e.preventDefault(); go(ORDER[+e.key]); }
+  });
+
+  /* ---------- status bar: sliding window indicator, scroll %, clock ---------- */
+  const tabsWrap = $('.bar-tabs');
+  const tabs = $$('.bar-tab');
+  const ind = $('.bar-ind');
+  let curTab = tabs[0];
+  function placeInd() {
+    if (!curTab || !ind) return;
+    ind.style.width = curTab.offsetWidth + 'px';
+    ind.style.transform = `translateX(${curTab.offsetLeft}px)`;
+  }
+  if (ind) { tabsWrap.classList.add('has-ind'); placeInd(); }
+  addEventListener('resize', placeInd, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeInd);
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const id = '#' + en.target.id;
+      tabs.forEach(t => { if (t.getAttribute('href') === id) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current'); });
+      curTab = tabs.find(t => t.getAttribute('href') === id) || curTab;
+      placeInd();
+      if (tabsWrap.scrollWidth > tabsWrap.clientWidth) tabsWrap.scrollTo({ left: Math.max(0, curTab.offsetLeft - 40), behavior: reduce ? 'auto' : 'smooth' });
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  ORDER.forEach(h => { const el = $(h); if (el) spy.observe(el); });
+
+  const hero = $('#hero');
+  let heroH = hero.offsetHeight;
+  addEventListener('resize', () => { heroH = hero.offsetHeight; }, { passive: true });
+  const pct = $('.bar-scroll');
+  let sraf = 0;
+  function onScroll() {
+    sraf = 0;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const y = scrollY;
+    const p = max > 0 ? Math.min(1, y / max) : 0;
+    bar.style.setProperty('--progress', p.toFixed(4));
+    if (pct) pct.textContent = y < 8 ? 'Top' : (y >= max - 8 ? 'Bot' : Math.round(p * 100) + '%');
+    const k = Math.min(1, y / Math.max(1, heroH * 0.85));
+    root.style.setProperty('--rain-o', (0.26 - 0.16 * k).toFixed(3));
+    root.classList.toggle('scrolled', y > 60);
+  }
+  addEventListener('scroll', () => { if (!sraf) sraf = requestAnimationFrame(onScroll); }, { passive: true });
+  onScroll();
+
+  const clock = $('.bar-clock');
+  if (clock) {
+    const f = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Cairo' });
+    const tick = () => { clock.textContent = 'Alexandria ' + f.format(new Date()); };
+    tick();
+    setInterval(tick, 20000);
+  }
+  $$('[data-year]').forEach(el => { el.textContent = String(new Date().getFullYear()); });
+
+  /* ---------- the name, drawn in phosphor pixels ---------- */
+  const nameFx = (() => {
+    const host = $('.name');
+    const cv = $('.name-canvas');
+    const ctx = cv && cv.getContext ? cv.getContext('2d') : null;
+    if (!host || !ctx) return null;
+    const F = {
+      A: ['.###.', '#...#', '#...#', '#####', '#...#', '#...#', '#...#'],
+      H: ['#...#', '#...#', '#...#', '#####', '#...#', '#...#', '#...#'],
+      M: ['#...#', '##.##', '#.#.#', '#.#.#', '#...#', '#...#', '#...#'],
+      E: ['#####', '#....', '#....', '####.', '#....', '#....', '#####'],
+      D: ['####.', '#...#', '#...#', '#...#', '#...#', '#...#', '####.'],
+      O: ['.###.', '#...#', '#...#', '#...#', '#...#', '#...#', '.###.'],
+      S: ['.####', '#....', '#....', '.###.', '....#', '....#', '####.']
+    };
+    let px = [], cols = 1, cell = 10, pad = 20, dpr = 1, W = 0, H = 0, S = 0, spr = null, hot = null;
+    let lit = false, booting = false, t0 = 0, raf = 0, visible = true, lastW = -1;
+
+    function sprites() {
+      S = Math.ceil(cell * 3);
+      const mk = (core, a1, a2) => {
+        const c = document.createElement('canvas');
+        c.width = c.height = Math.ceil(S * dpr);
+        const x = c.getContext('2d');
+        x.scale(dpr, dpr);
+        const g = x.createRadialGradient(S / 2, S / 2, 0, S / 2, S / 2, S / 2);
+        g.addColorStop(0, `rgba(${C.glow},${a1})`);
+        g.addColorStop(0.42, `rgba(${C.glow},${a2})`);
+        g.addColorStop(1, `rgba(${C.glow},0)`);
+        x.fillStyle = g;
+        x.fillRect(0, 0, S, S);
+        const d = cell * 0.78, rr = cell * 0.16;
+        x.fillStyle = core;
+        x.beginPath();
+        if (x.roundRect) x.roundRect((S - d) / 2, (S - d) / 2, d, d, rr); else x.rect((S - d) / 2, (S - d) / 2, d, d);
+        x.fill();
+        return c;
+      };
+      spr = mk(C.phos, 0.3, 0.09);
+      hot = mk(C.hot, 0.6, 0.18);
+    }
+    function build() {
+      const w = host.clientWidth;
+      lastW = w;
+      const words = w >= 760 ? ['AHMED HOSSAM'] : ['AHMED', 'HOSSAM'];
+      px = [];
+      let r0 = 0, maxC = 0;
+      for (const word of words) {
+        let c = 0;
+        for (const ch of word) {
+          if (ch === ' ') { c += 4; continue; }
+          const g = F[ch];
+          for (let y = 0; y < 7; y++) {
+            for (let x = 0; x < 5; x++) {
+              if (g[y][x] === '#') px.push({ gx: c + x, gy: r0 + y, on: lit ? 1 : 0, heat: 0, ox: 0, oy: 0, b: 0, t: 0, f: false });
+            }
+          }
+          c += 6;
+        }
+        maxC = Math.max(maxC, c - 1);
+        r0 += 9;
+      }
+      cols = maxC;
+      const rows = r0 - 2;
+      cell = Math.max(5, Math.min(40, Math.floor(w / cols)));
+      pad = cell * 2;
+      W = cols * cell;
+      H = rows * cell;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round((W + pad * 2) * dpr);
+      cv.height = Math.round((H + pad * 2) * dpr);
+      cv.style.width = (W + pad * 2) + 'px';
+      cv.style.height = (H + pad * 2) + 'px';
+      cv.style.margin = -pad + 'px ' + ((w - W) / 2 - pad) + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      px.forEach(p => { p.t = (p.gx / cols) * 0.55 + (p.gy / (rows || 1)) * 0.12 + Math.random() * 0.3; });
+      sprites();
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W + pad * 2, H + pad * 2);
+      const h = S / 2;
+      for (const p of px) {
+        if (p.on <= 0) continue;
+        const cx = pad + p.gx * cell + cell / 2 + p.ox;
+        const cy = pad + p.gy * cell + cell / 2 + p.oy;
+        ctx.globalAlpha = Math.min(1, p.on * (0.84 + p.b * 0.4));
+        ctx.drawImage(spr, cx - h, cy - h, S, S);
+        if (p.heat > 0.03) {
+          ctx.globalAlpha = Math.min(1, p.heat);
+          ctx.drawImage(hot, cx - h, cy - h, S, S);
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+    function step(now) {
+      const t = (now - t0) / 1000;
+      let pending = false;
+      const r = cv.getBoundingClientRect();
+      const mx = ptr.x - r.left, my = ptr.y - r.top;
+      const near = ptr.on && mx > -60 && my > -60 && mx < r.width + 60 && my < r.height + 60;
+      const R = cell * 5;
+      for (const p of px) {
+        if (booting && p.on < 1) {
+          pending = true;
+          if (t >= p.t) {
+            if (!p.f) { p.f = true; p.heat = 1; }
+            p.on = Math.min(1, p.on + 0.34);
+          }
+        }
+        p.heat = p.heat > 0.03 ? p.heat * 0.87 : 0;
+        let tx = 0, ty = 0, b = 0;
+        if (near) {
+          const cx = pad + p.gx * cell + cell / 2, cy = pad + p.gy * cell + cell / 2;
+          const dx = cx - mx, dy = cy - my, d = Math.hypot(dx, dy);
+          if (d < R) {
+            const f = 1 - d / R, push = f * f * cell * 1.2, k = d || 1;
+            tx = (dx / k) * push;
+            ty = (dy / k) * push;
+            b = f;
+          }
+        }
+        p.ox += (tx - p.ox) * 0.15;
+        p.oy += (ty - p.oy) * 0.15;
+        p.b += (b - p.b) * 0.18;
+      }
+      if (booting && !pending) { booting = false; lit = true; }
+      if (!booting && Math.random() < 0.012) {
+        const p = px[(Math.random() * px.length) | 0];
+        if (p) p.heat = Math.max(p.heat, 0.5);
+      }
+    }
+    function loop(now) {
+      raf = 0;
+      if (!visible || document.hidden) return;
+      step(now);
+      draw();
+      raf = requestAnimationFrame(loop);
+    }
+    function kick() { if (!raf && visible && !reduce) raf = requestAnimationFrame(loop); }
+    const io = new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) kick(); });
+    let rz = 0;
+    const ro = new ResizeObserver(() => {
+      if (host.clientWidth === lastW) return;
+      cancelAnimationFrame(rz);
+      rz = requestAnimationFrame(() => { build(); draw(); });
+    });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) kick(); });
+    onTheme.push(() => { if (px.length) { sprites(); draw(); } });
+    return {
+      start(withBoot) {
+        lit = !withBoot || reduce;
+        booting = !lit;
+        build();
+        host.classList.add('has-canvas');
+        t0 = performance.now();
+        draw();
+        ro.observe(host);
+        if (!reduce) io.observe(host);
+      }
+    };
+  })();
+
+  /* ---------- the hacker, built from glowing cubes ---------- */
+  const hacker = $('.hacker');
+  const hackerFx = (() => {
+    const cv = $('#hacker-canvas');
+    const ctx = cv && cv.getContext ? cv.getContext('2d') : null;
+    if (!hacker || !ctx) return null;
+
+    /* ---- model: a grid of unit cubes (x right, y up, z toward the viewer) ---- */
+    const map = new Map();
+    const kk = (x, y, z) => x + ',' + y + ',' + z;
+    const put = (x, y, z, t) => map.set(kk(x, y, z), { x, y, z, t });
+    let seed = 11;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+    // torso (hoodie)
+    const HW = [9, 9, 9, 9, 9, 8.6, 7.6, 6.2, 4.2];
+    for (let y = 0; y < HW.length; y++)
+      for (let x = -10; x <= 10; x++)
+        for (let z = -5; z <= 5; z++)
+          if ((x / HW[y]) ** 2 + (z / 4.3) ** 2 <= 1) put(x, y, z, 'cloth');
+    // hood
+    for (let y = 5; y <= 21; y++)
+      for (let x = -7; x <= 7; x++)
+        for (let z = -6; z <= 7; z++)
+          if ((x / 6.3) ** 2 + ((y - 13) / 6.9) ** 2 + ((z - 0.5) / 5.6) ** 2 <= 1) put(x, y, z, 'hood');
+    // the opening of the hood: a deep tunnel, dark walls
+    for (let y = 6; y <= 20; y++)
+      for (let x = -6; x <= 6; x++)
+        for (let z = 3; z <= 7; z++) {
+          const k = kk(x, y, z);
+          if (!map.has(k)) continue;
+          if ((x / 4) ** 2 + ((y - 12.6) / 5) ** 2 <= 1) map.delete(k);
+          else if (z <= 5 && (x / 5.2) ** 2 + ((y - 12.6) / 6.2) ** 2 <= 1) map.get(k).t = 'inner';
+        }
+    // the face: a screen of falling code at the bottom of the tunnel
+    for (let y = 7; y <= 18; y++)
+      for (let x = -4; x <= 4; x++)
+        if ((x / 4) ** 2 + ((y - 12.6) / 5) ** 2 <= 1 && map.has(kk(x, y, 2))) map.get(kk(x, y, 2)).t = 'code';
+    // hoodie strings and zipper
+    const front = (x, y) => { for (let z = 6; z >= -6; z--) if (map.has(kk(x, y, z))) return z; return null; };
+    const trim = (x, y) => { const z = front(x, y); if (z !== null && map.get(kk(x, y, z)).t === 'cloth') map.get(kk(x, y, z)).t = 'trim'; };
+    for (const x of [-2, 2]) for (let y = 1; y <= 5; y++) trim(x, y);
+    for (let y = 0; y <= 6; y += 2) trim(0, y);
+
+    // laptop: base, keys, and a lid that faces the viewer
+    const lidZ = y => Math.round(13 - (y - 1) * 0.2);
+    for (let x = -5; x <= 5; x++) {
+      for (let z = 6; z <= 13; z++) put(x, 0, z, 'lid');
+      for (let z = 7; z <= 10; z++) if ((x + z) % 2 === 0 && Math.abs(x) <= 4) put(x, 1, z, 'key');
+      for (let y = 1; y <= 8; y++) { put(x, y, lidZ(y), 'lid'); put(x, y, lidZ(y) - 1, 'lid'); }
+    }
+    for (let y = 1; y <= 8; y++)
+      for (let x = -5; x <= 5; x++)
+        if (x === -5 || x === 5 || y === 8) for (const z of [lidZ(y), lidZ(y) - 1]) map.get(kk(x, y, z)).t = 'rim';
+    for (const [lx, ly] of [[-2, 6], [-1, 5], [-2, 4], [0, 4], [1, 4]]) put(lx, ly, lidZ(ly) + 1, 'logo'); // ">_"
+
+    // arms reaching for the keyboard
+    const capsule = (a, b, r) => {
+      const dx = b[0] - a[0], dy = b[1] - a[1], dz = b[2] - a[2], L2 = dx * dx + dy * dy + dz * dz;
+      for (let x = Math.floor(Math.min(a[0], b[0]) - r - 1); x <= Math.ceil(Math.max(a[0], b[0]) + r + 1); x++)
+        for (let y = Math.floor(Math.min(a[1], b[1]) - r - 1); y <= Math.ceil(Math.max(a[1], b[1]) + r + 1); y++)
+          for (let z = Math.floor(Math.min(a[2], b[2]) - r - 1); z <= Math.ceil(Math.max(a[2], b[2]) + r + 1); z++) {
+            const u = Math.max(0, Math.min(1, ((x - a[0]) * dx + (y - a[1]) * dy + (z - a[2]) * dz) / L2));
+            if (Math.hypot(x - (a[0] + u * dx), y - (a[1] + u * dy), z - (a[2] + u * dz)) <= r && !map.has(kk(x, y, z))) put(x, y, z, 'cloth');
+          }
+    };
+    for (const s of [-1, 1]) {
+      capsule([s * 8, 5, 0], [s * 7.5, 3.2, 4], 1.5);
+      capsule([s * 7.5, 3.2, 4], [s * 3.4, 2.2, 7.5], 1.4);
+      for (const [hx, hz] of [[3, 8], [4, 8], [3, 9], [4, 9]]) put(s * hx, 2, hz, 'hand');
+    }
+
+    /* ---- bake: exposed faces only, kinds, build-in animation data ---- */
+    const N = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
+    const FACE = [[1, 3, 7, 5], [0, 4, 6, 2], [2, 3, 7, 6], [0, 1, 5, 4], [4, 5, 7, 6], [0, 2, 3, 1]];
+    const KIND = { code: 1, hand: 2, key: 3, trim: 4, rim: 4, logo: 4 };
+    const EMIT = { trim: 0.5, rim: 0.9, logo: 1 };
+    const V = [];
+    map.forEach(v => {
+      let m = 0;
+      for (let f = 0; f < 6; f++) if (!map.has(kk(v.x + N[f][0], v.y + N[f][1], v.z + N[f][2]))) m |= 1 << f;
+      if (!m) return;
+      v.m = m; v.k = KIND[v.t] || 0; v.e = EMIT[v.t] || 0; v.r = rnd();
+      v.d = (v.y + 22) / 46 * 0.9 + rnd() * 0.45;
+      v.sx = (rnd() - 0.5) * 56; v.sy = 16 + rnd() * 32; v.sz = (rnd() - 0.5) * 56;
+      v.g = v.x < 0 ? 0 : 1; v.hit = 0; v.ii = 0; v.c = null;
+      V.push(v);
+    });
+    const codeV = V.filter(v => v.k === 1), keyV = V.filter(v => v.k === 3);
+    const NV = V.length, NO = 9;
+    const orbs = Array.from({ length: NO }, (_, i) => ({
+      k: 5, m: 63, rx: 9.6 + rnd() * 2.2, rz: 7 + rnd() * 2.6, y0: 11 + rnd() * 10,
+      sp: (0.35 + rnd() * 0.5) * (i % 2 ? 1 : -1), ph: rnd() * 6.28, hot: i % 3 === 0, x: 0, y: 0, z: 0
+    }));
+
+    const nrm = a => { const l = Math.hypot(a[0], a[1], a[2]); return [a[0] / l, a[1] / l, a[2] / l]; };
+    const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+    const L1 = nrm([-0.4, 0.9, 0.5]), L2 = nrm([0.8, 0.2, -0.6]), LAMP = [0, 9, 8];
+    const mix = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+    const rgb = c => 'rgb(' + (c[0] | 0) + ',' + (c[1] | 0) + ',' + (c[2] | 0) + ')';
+    const FS = [0.78, 0.5, 1, 0.3, 0.66, 0.4];
+    let edge = '', spP = null, spH = null;
+
+    function sprite(c) {
+      const s = document.createElement('canvas');
+      s.width = s.height = 64;
+      const x = s.getContext('2d'), g = x.createRadialGradient(32, 32, 0, 32, 32, 32);
+      g.addColorStop(0, `rgba(${c.join(',')},1)`);
+      g.addColorStop(0.25, `rgba(${c.join(',')},.42)`);
+      g.addColorStop(1, `rgba(${c.join(',')},0)`);
+      x.fillStyle = g;
+      x.fillRect(0, 0, 64, 64);
+      return s;
+    }
+    function bake() {
+      const P = C.phosA, K1 = C.clothA, K2 = C.foldA;
+      edge = `rgba(${C.phosRgb},.34)`;
+      spP = sprite(P);
+      spH = sprite(C.hotA);
+      for (const v of V) {
+        if (v.k !== 0 && v.k !== 4) continue;
+        v.c = [];
+        const g = Math.exp(-Math.hypot(v.x - LAMP[0], (v.y - LAMP[1]) * 0.8, v.z - LAMP[2]) / 11);
+        for (let f = 0; f < 6; f++) {
+          if (!(v.m & (1 << f))) { v.c[f] = null; continue; }
+          const n = N[f];
+          const dif = Math.max(0, dot(n, L1)) * 0.6 + Math.max(0, dot(n, L2)) * 0.25 + 0.04;
+          if (v.k === 4) { v.c[f] = rgb(mix(K1, P, v.e * (0.5 + 0.5 * dif / 0.85))); continue; }
+          let base = mix(K1, K2, v.r), km = 1;
+          if (v.t === 'inner') { base = base.map(c => c * 0.55); km = 0.3; }
+          else if (v.t === 'lid') { base = K1.map(c => c * 0.7); km = 0.22; }
+          const k = Math.min(0.8, km * (0.04 + 0.36 * dif + 0.46 * g * g * (0.4 + 0.6 * Math.max(0, n[1] * 0.5 + 0.5))));
+          v.c[f] = rgb(mix(base, P, k));
+        }
+      }
+    }
+
+    /* ---- canvas + camera ---- */
+    const D = 75, C0 = [0, 9.5, 4];
+    let cw = 0, ch = 0, dpr = 1, U = 10, ox = 0, oy = 0;
+    function size() {
+      const r = hacker.getBoundingClientRect();
+      cw = Math.max(1, Math.round(r.width)); ch = Math.max(1, Math.round(r.height));
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(cw * dpr); cv.height = Math.round(ch * dpr);
+      U = Math.min(cw / 30, ch / 29);
+      ox = cw / 2; oy = ch * 0.5;
+    }
+
+    const X = new Float32Array(NV + NO), Y = new Float32Array(NV + NO), Z = new Float32Array(NV + NO);
+    const SC = new Float32Array(NV + NO), AL = new Float32Array(NV + NO), DEP = new Float32Array(NV + NO);
+    const idx = new Int32Array(NV + NO);
+    const PX = new Float32Array(8), PY = new Float32Array(8);
+    const heads = Array.from({ length: 9 }, () => 8 + Math.random() * 12), speeds = heads.map(() => 5 + Math.random() * 7);
+    let T = 0, yaw = 0.2, pitch = 0.2, nextKey = 0, nextGlitch = 3, glitchAt = -9, glitchY = 10, glitchAmp = 1, still = false;
+
+    function draw(dt) {
+      const cyw = Math.cos(yaw), syw = Math.sin(yaw), cpt = Math.cos(pitch), spt = Math.sin(pitch);
+      const EX = [cyw, syw * spt, -syw * cpt], EY = [0, cpt, spt], EZ = [syw, -cyw * spt, cyw * cpt];
+      const NR = [EX, EX.map(c => -c), EY, EY.map(c => -c), EZ, EZ.map(c => -c)];
+      const proj = (x, y, z, out, k) => {
+        const rx = x - C0[0], ry = y - C0[1], rz = z - C0[2];
+        const x1 = rx * cyw + rz * syw, z1 = -rx * syw + rz * cyw;
+        const X2 = x1, Y2 = ry * cpt - z1 * spt, Z2 = ry * spt + z1 * cpt, p = D / (D - Z2);
+        out[k] = ox + X2 * U * p; out[k + 1] = oy - Y2 * U * p;
+      };
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.clearRect(0, 0, cw, ch);
+
+      // soft light behind the hood and on the floor
+      let g = ctx.createRadialGradient(ox, oy - 3 * U, 0, ox, oy - 3 * U, U * 15);
+      g.addColorStop(0, `rgba(${C.glow.split(',').join(',')},.16)`);
+      g.addColorStop(1, `rgba(${C.glow.split(',').join(',')},0)`);
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, cw, ch);
+
+      // floor grid
+      const fp = new Float32Array(2), fq = new Float32Array(2);
+      ctx.lineWidth = 1;
+      for (let i = -12; i <= 12; i += 4) {
+        ctx.strokeStyle = `rgba(${C.phosRgb},${i === 0 ? 0.3 : 0.15})`;
+        proj(i, -0.5, -12, fp, 0); proj(i, -0.5, 12, fq, 0);
+        ctx.beginPath(); ctx.moveTo(fp[0], fp[1]); ctx.lineTo(fq[0], fq[1]); ctx.stroke();
+        proj(-12, -0.5, i, fp, 0); proj(12, -0.5, i, fq, 0);
+        ctx.beginPath(); ctx.moveTo(fp[0], fp[1]); ctx.lineTo(fq[0], fq[1]); ctx.stroke();
+      }
+
+      // transforms for every cube
+      const bob = still ? 0 : Math.sin(T * 1.3) * 0.18;
+      const glitching = !still && T - glitchAt < 0.16;
+      const sweep = (!still && T % 6 < 1.9) ? (T % 6) / 1.9 * 24 - 3 : -99;
+      let cnt = 0;
+      for (let i = 0; i < NV + NO; i++) {
+        let wx, wy, wz, sc = 0.94, al = 1;
+        if (i < NV) {
+          const v = V[i];
+          const a = Math.min(1, Math.max(0, (T - v.d) / 0.85));
+          if (a <= 0.001) { AL[i] = 0; continue; }
+          const e = a >= 1 ? 1 : 1 + 2.7 * (a - 1) ** 3 + 1.7 * (a - 1) ** 2, f = 1 - e;
+          wx = v.x + v.sx * f; wy = v.y + v.sy * f + bob; wz = v.z + v.sz * f;
+          if (v.k === 2 && !still) wy += Math.max(0, Math.sin(T * 13 + v.g * 2.1)) * 0.5;
+          if (glitching && Math.abs(v.y - glitchY) < 1.6) wx += (v.r < 0.5 ? -1 : 1) * glitchAmp;
+          if (a < 1) { sc *= 0.35 + 0.65 * Math.min(1, e); al = a; }
+        } else {
+          const o = orbs[i - NV], a = Math.min(1, Math.max(0, (T - 1.5 - (i - NV) * 0.12) / 0.5));
+          if (a <= 0.001) { AL[i] = 0; continue; }
+          const an = o.ph + o.sp * T;
+          o.x = o.rx * Math.cos(an); o.z = 2 + o.rz * Math.sin(an); o.y = o.y0 + 1.3 * Math.sin(T * 1.3 + o.ph);
+          wx = o.x; wy = o.y + bob; wz = o.z; sc = 0.78; al = a;
+        }
+        const rx = wx - C0[0], ry = wy - C0[1], rz = wz - C0[2];
+        const x1 = rx * cyw + rz * syw, z1 = -rx * syw + rz * cyw;
+        X[i] = x1; Y[i] = ry * cpt - z1 * spt; Z[i] = ry * spt + z1 * cpt;
+        SC[i] = sc; AL[i] = al;
+        DEP[i] = X[i] * X[i] + Y[i] * Y[i] + (D - Z[i]) * (D - Z[i]);
+        idx[cnt++] = i;
+      }
+      const order = idx.subarray(0, cnt);
+      order.sort((a, b) => DEP[b] - DEP[a]);
+
+      // living parts: code rain on the face, typing keys
+      for (let c = 0; c < 9; c++) {
+        heads[c] -= speeds[c] * dt;
+        if (heads[c] < 4) { heads[c] = 18 + Math.random() * 10; speeds[c] = 5 + Math.random() * 7; }
+      }
+      if (still) { for (let c = 0; c < 9; c++) heads[c] = 18 - c * 1.7; }
+      for (const v of codeV) {
+        const d = v.y - heads[v.x + 4];
+        const trail = d >= 0 && d < 10 ? (1 - d / 10) ** 1.3 : 0;
+        v.ii = Math.max(trail, 0.14 + 0.08 * Math.sin(T * 3 + v.r * 20));
+      }
+      if (!still && T > nextKey && keyV.length) { keyV[(Math.random() * keyV.length) | 0].hit = 1; nextKey = T + 0.07 + Math.random() * 0.12; }
+      for (const v of keyV) v.hit = Math.max(0, v.hit - dt * 5);
+
+      const pulse = 0.85 + 0.15 * Math.sin(T * 2.2);
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = Math.max(0.6, U * 0.045);
+      for (let q = 0; q < cnt; q++) {
+        const i = order[q], isV = i < NV, v = isV ? V[i] : orbs[i - NV];
+        const x = X[i], y = Y[i], z = Z[i], s = SC[i] * 0.5, p = D / (D - z), al = AL[i];
+        for (let k = 0; k < 8; k++) {
+          const sx = k & 1 ? s : -s, sy = k & 2 ? s : -s, sz = k & 4 ? s : -s;
+          const cx3 = x + sx * EX[0] + sy * EY[0] + sz * EZ[0];
+          const cy3 = y + sx * EX[1] + sy * EY[1] + sz * EZ[1];
+          const cz3 = z + sx * EX[2] + sy * EY[2] + sz * EZ[2];
+          const pp = D / (D - cz3);
+          PX[k] = ox + cx3 * U * pp; PY[k] = oy - cy3 * U * pp;
+        }
+        // dynamic base colour (code, keys, hands, orbs)
+        let dyn = null, glow = 0, spr = spP;
+        if (v.k === 1) {
+          const ii = v.ii;
+          dyn = ii > 0.82 ? mix(C.phosA, C.hotA, (ii - 0.82) / 0.18) : mix([10, 30, 18], C.phosA, ii / 0.82);
+          if (ii > 0.45) { glow = ii * 0.8; if (ii > 0.85) spr = spH; }
+        } else if (v.k === 3) {
+          dyn = mix(C.clothA.map(c => c * 1.4), C.phosA, 0.1 + 0.85 * v.hit);
+          glow = v.hit * 0.9;
+        } else if (v.k === 2) {
+          dyn = C.hotA.map(c => c * 0.78); glow = 0.2;
+        } else if (v.k === 5) {
+          dyn = v.hot ? C.hotA : C.phosA; glow = 0.95;
+        } else if (v.k === 4) {
+          glow = v.e * pulse * 0.7;
+        }
+        if (isV && Math.abs(v.y - sweep) < 1) glow = Math.max(glow, 0.45);
+
+        ctx.globalAlpha = al;
+        ctx.strokeStyle = edge;
+        for (let f = 0; f < 6; f++) {
+          if (!(v.m & (1 << f))) continue;
+          const nx = NR[f][0], ny = NR[f][1], nz = NR[f][2];
+          if (nx * -(x + s * nx) + ny * -(y + s * ny) + nz * (D - (z + s * nz)) <= 0) continue;
+          ctx.fillStyle = dyn ? rgb(dyn.map(c => c * FS[f])) : v.c[f];
+          const F = FACE[f];
+          ctx.beginPath();
+          ctx.moveTo(PX[F[0]], PY[F[0]]);
+          ctx.lineTo(PX[F[1]], PY[F[1]]);
+          ctx.lineTo(PX[F[2]], PY[F[2]]);
+          ctx.lineTo(PX[F[3]], PY[F[3]]);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+        }
+        if (glow > 0.05) {
+          const r = U * p * (v.k === 5 ? 1.9 : 2.1);
+          ctx.globalCompositeOperation = 'lighter';
+          ctx.globalAlpha = Math.min(1, glow) * al;
+          ctx.drawImage(spr, ox + x * U * p - r, oy - y * U * p - r, r * 2, r * 2);
+          ctx.globalCompositeOperation = 'source-over';
+        }
+      }
+      ctx.globalAlpha = 1;
+
+      // camera drifts with the pointer
+      const px = ptr.on ? ptr.x / innerWidth - 0.5 : 0, py = ptr.on ? ptr.y / innerHeight - 0.5 : 0;
+      const ty = still ? 0.28 : Math.sin(T * 0.45) * 0.22 + px * 0.6, tp = still ? 0.2 : 0.2 - py * 0.18;
+      const k = Math.min(1, dt * 4);
+      yaw += (ty - yaw) * k; pitch += (tp - pitch) * k;
+      if (!still && T > nextGlitch) { glitchAt = T; glitchY = 4 + Math.random() * 15; glitchAmp = Math.random() < 0.5 ? 1 : 2; nextGlitch = T + 2.5 + Math.random() * 3.5; }
+    }
+
+    /* ---- run loop ---- */
+    let started = false, running = false, visible = true, raf = 0, last = 0;
+    function loop(now) {
+      raf = 0;
+      if (!running || !visible || document.hidden) return;
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      T += dt;
+      draw(dt);
+      raf = requestAnimationFrame(loop);
+    }
+    function kick() { if (!raf && running && visible && !still) { last = performance.now(); raf = requestAnimationFrame(loop); } }
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) kick(); }).observe(hacker);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) kick(); });
+    let rz = 0, lastBox = '';
+    new ResizeObserver(() => {
+      if (!started) return;
+      cancelAnimationFrame(rz);
+      rz = requestAnimationFrame(() => { size(); if (still) { T = 40; yaw = 0.28; draw(0); } });
+    }).observe(hacker);
+    onTheme.push(() => { if (!started) return; bake(); if (still) { T = 40; draw(0); } });
+
+    return {
+      start(build) {
+        started = true;
+        still = reduce;
+        size(); bake();
+        T = build && !reduce ? 0 : 40;
+        running = true;
+        if (still) { yaw = 0.28; draw(0); } else kick();
+      }
+    };
+  })();
+
+  /* ---------- background rain ---------- */
+  let rainBoost = 0;
+  (() => {
+    const c = $('#rain');
+    const ctx = c && c.getContext ? c.getContext('2d') : null;
+    if (!ctx) return;
+    const POOL = '01{}[]()<>/=+*$#;:&|!?asyncawaitconstfunctionreturnnpmnodeSELECTFROMWHERE';
+    const FS = 15, CW = 18;
+    let w = 0, h = 0, drops = [], last = 0, font = FS + 'px monospace';
+    const paint = () => { ctx.globalAlpha = 1; ctx.fillStyle = C.void; ctx.fillRect(0, 0, w, h); };
+    const still = () => {
+      ctx.font = font;
+      ctx.textBaseline = 'top';
+      ctx.fillStyle = C.phos;
+      for (let i = 0; i < 420; i++) {
+        ctx.globalAlpha = Math.random() * 0.5;
+        ctx.fillText(POOL[(Math.random() * POOL.length) | 0], Math.floor(Math.random() * (w / CW)) * CW + 3, Math.floor(Math.random() * (h / FS)) * FS);
+      }
+      ctx.globalAlpha = 1;
+    };
+    function size(force) {
+      const nw = innerWidth, nh = innerHeight;
+      if (!force && nw === w && Math.abs(nh - h) < 140) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = nw; h = nh;
+      c.width = Math.round(w * dpr);
+      c.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.ceil(w / CW);
+      drops = Array.from({ length: n }, (_, i) => drops[i] || { y: Math.floor((-Math.random() * h) / FS), v: 0.25 + Math.random() * 0.75, a: Math.random(), p: '' });
+      paint();
+      if (reduce) still();
+    }
+    function step() {
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = `rgba(${C.voidRgb},0.14)`;
+      ctx.fillRect(0, 0, w, h);
+      ctx.font = font;
+      ctx.textBaseline = 'top';
+      const boost = rainBoost > 0 ? 2.2 : 1;
+      for (let i = 0; i < drops.length; i++) {
+        const d = drops[i];
+        d.a += d.v * boost;
+        if (d.a < 1) continue;
+        d.a -= 1;
+        const x = i * CW + 3, y = d.y * FS;
+        let near = false;
+        if (ptr.on) { const dx = x - ptr.x, dy = y - ptr.y; near = dx * dx + dy * dy < 170 * 170; }
+        if (d.p) {
+          ctx.globalAlpha = near ? 1 : 0.8;
+          ctx.fillStyle = near ? C.hot : C.phos;
+          ctx.fillText(d.p, x, y - FS);
+        }
+        const ch = POOL[(Math.random() * POOL.length) | 0];
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = C.hot;
+        ctx.fillText(ch, x, y);
+        d.p = ch;
+        d.y += 1;
+        if (y > h && Math.random() > 0.965) { d.y = Math.floor(-Math.random() * 10); d.p = ''; }
+      }
+    }
+    function loop(now) {
+      const every = rainBoost > 0 ? 40 : (scrollY < heroH ? 50 : 95);
+      if (now - last >= every) { last = now; step(); }
+      requestAnimationFrame(loop);
+    }
+    size(true);
+    let rt = 0;
+    addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => size(false), 160); });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => { font = FS + 'px "Martian Mono", monospace'; if (reduce) { paint(); still(); } });
+    }
+    onTheme.push(() => { paint(); if (reduce) still(); });
+    if (!reduce) requestAnimationFrame(loop);
+  })();
+
+  function matrixMode() {
+    if (reduce) return;
+    root.classList.add('matrix-mode');
+    rainBoost = 1;
+    setTimeout(() => { root.classList.remove('matrix-mode'); rainBoost = 0; }, 6000);
+  }
+
+  /* ---------- boot sequence: the one authored moment ---------- */
+  function typeTo(el, text, perChar) {
+    const o = { n: 0 };
+    return G.to(o, { n: text.length, duration: Math.max(0.05, text.length * perChar), ease: 'none', onUpdate: () => { el.textContent = text.slice(0, Math.round(o.n)); } });
+  }
+  if (willBoot) {
+    G.set($$('[data-boot]'), { autoAlpha: 0 });
+    root.classList.remove('booting');
+    hero.setAttribute('aria-busy', 'true');
+    if (nameFx) nameFx.start(true);
+    const tl = G.timeline({ defaults: { ease: 'power3.out' }, onComplete: () => hero.removeAttribute('aria-busy') });
+    const cmdTyped = $('.hero-cmd .typed');
+    const who = cmdTyped.textContent;
+    cmdTyped.textContent = '';
+    tl.set('.hero-cmd', { autoAlpha: 1 }, 0).add(typeTo(cmdTyped, who, 0.06), 0.1);
+    if (hacker) tl.to(hacker, { autoAlpha: 1, duration: 0.5 }, 0.3).call(() => { if (hackerFx) hackerFx.start(true); }, null, 0.35);
+    $$('.hero-role, .hero-notes p').forEach((p, i) => {
+      const parts = $$('[data-scramble]', p);
+      const at = 0.62 + i * 0.16;
+      tl.set(p, { autoAlpha: 1 }, at);
+      if (SCR && parts.length) {
+        parts.forEach((s, j) => {
+          const txt = s.textContent;
+          s.textContent = '';
+          tl.to(s, { duration: 0.75, scrambleText: { text: txt, chars: '01<>/{}[]$#_', revealDelay: 0.12, speed: 0.55 } }, at + j * 0.12);
+        });
+      } else {
+        tl.from(p, { y: 8, duration: 0.5 }, at);
+      }
+    });
+    tl.fromTo('.hero-cta', { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.7 }, 1.15);
+  } else {
+    if (nameFx) nameFx.start(false);
+    if (hackerFx) hackerFx.start(!reduce);
+  }
+
+  /* ---------- projects (same cards as the first version) ----------
+     Screenshots: add file paths to "imgs" of any project. With none, a placeholder shows. */
+  const PROJECTS = [
+    { k: "web", n: "Deep Fake Audios", t: "Graduation Project", s: "React.js · Node.js · Flutter · AI · SQL", r: "Role: Mobile Application & Database Developer", u: "https://github.com/AhmedHossamEissa1/Graduation-Project-CCE-2025", imgs: ['images/deepfake/1.png', 'images/deepfake/2.png', 'images/deepfake/3.png'],
+      d: "Deepfake audio detection platform with speech-to-speech, text-to-speech, and an interactive detection game. I built the Flutter mobile app and designed the database for users, audio data, and application records." },
+    { k: "web", n: "Car Rental System", t: "Team Project", s: "Vue.js · JavaScript · PHP · SQL · HTML/CSS", r: "Role: Database Developer", u: "https://github.com/AhmedHossamEissa1/Car-Rental", imgs: ['images/car rental/1.png', 'images/car rental/2.png', 'images/car rental/3.png'],
+      d: "Full-stack rental platform with vehicle search, reservations, automated rental workflows, and an admin dashboard. I designed the relational database and the SQL behind reservations, payments, rental status, and date-based reporting." },
+    { k: "app", n: "Chat App", t: "Personal Project", s: "Flutter · Dart · Firebase Auth · Cloud Firestore", r: "", u: "https://github.com/AhmedHossamEissa1/Chat-app", imgs: ['images/chat app/1.jpg', 'images/chat app/2.jpg', 'images/chat app/3.jpg'],
+      d: "Real-time chat app using Firebase Authentication and Cloud Firestore, with live message updates through StreamBuilder." },
+    { k: "app", n: "Bookly App", t: "Personal Project", s: "Flutter · Dart · MVVM · Google Books API", r: "", u: "https://github.com/AhmedHossamEissa1/Bookly_App", imgs: ['images/bookly app/1.png', 'images/bookly app/2.png', 'images/bookly app/3.png'],
+      d: "Book discovery app built with the MVVM pattern, consuming the Google Books REST API." },
+    { k: "app", n: "News App", t: "Personal Project", s: "Flutter · Dart · REST API", r: "", u: "https://github.com/AhmedHossamEissa1/news_app", imgs: ['images/news app/1.png', 'images/news app/2.png', 'images/news app/3.png'],
+      d: "Fetches the latest headlines from a news API. Search for any story, browse by category, and tap an article to read the full story from its source." },
+    { k: "app", n: "Notes App", t: "Personal Project", s: "Flutter · Dart", r: "", u: "https://github.com/AhmedHossamEissa1/notes_app", imgs: ['images/notes app/1.png','images/notes app/2.png','images/notes app/3.png'],
+      d: "Create notes in any color, edit or delete them, and search through your notes instantly." },
+    { k: "app", n: "Weather App", t: "Personal Project", s: "Flutter · Dart · Weather API", r: "", u: "https://github.com/AhmedHossamEissa1/weather-app", imgs: ['images/weather app/1.png', 'images/weather app/2.png', 'images/weather app/3.png'],
+      d: "Enter any country or city to get its exact temperature from a weather API. The app’s look changes with the temperature." }
+  ];
+  (() => {
+    const gw = $('#gw'), ga = $('#ga');
+    if (!gw || !ga) return;
+    PROJECTS.forEach(p => {
+      const a = document.createElement('a');
+      a.className = 'pj-card'; a.href = p.u; a.target = '_blank'; a.rel = 'noopener';
+      a.setAttribute('aria-label', p.n + ' on GitHub');
+      const sh = document.createElement('div');
+      sh.className = 'pj-shots' + (p.k === 'app' ? ' app' : '');
+      const n = p.imgs.length || 3;
+      let dots = '';
+      for (let i = 0; i < n; i++) {
+        let el;
+        if (p.imgs.length) { el = document.createElement('img'); el.src = p.imgs[i]; el.alt = p.n + ' screenshot ' + (i + 1); el.loading = 'lazy';
+          el.addEventListener('error', () => {
+            const ph = document.createElement('div');
+            ph.className = 'pj-ph' + (el.classList.contains('on') ? ' on' : '');
+            ph.innerHTML = '<b>screenshot_' + (i + 1) + '.png</b>' + p.n;
+            el.replaceWith(ph);
+          }); }
+        else { el = document.createElement('div'); el.className = 'pj-ph'; el.innerHTML = '<b>screenshot_' + (i + 1) + '.png</b>' + p.n; }
+        if (i === 0) el.classList.add('on');
+        sh.appendChild(el);
+        dots += '<span' + (i === 0 ? ' class="on"' : '') + '></span>';
+      }
+      const dw = document.createElement('div');
+      dw.className = 'pj-dots'; dw.innerHTML = dots; sh.appendChild(dw);
+      const info = document.createElement('div');
+      info.className = 'pj-info';
+      info.innerHTML = '<h3>' + p.n + '<span>' + p.t + ' ↗</span></h3><div class="pj-tag">' + p.s + '</div>' + (p.r ? '<div class="pj-role">' + p.r + '</div>' : '') + '<p>' + p.d + '</p>';
+      a.appendChild(sh); a.appendChild(info);
+      (p.k === 'app' ? ga : gw).appendChild(a);
+      let k = 0;
+      const ds = dw.children, items = () => sh.querySelectorAll('img, .pj-ph');
+      if (n > 1 && !reduce) setInterval(() => {
+        const it = items();
+        it[k].classList.remove('on'); ds[k].classList.remove('on');
+        k = (k + 1) % n;
+        it[k].classList.add('on'); ds[k].classList.add('on');
+      }, 2600 + Math.random() * 900);
+      /* 3D tilt */
+      if (!reduce && fine) {
+        a.addEventListener('mousemove', e => {
+          const r = a.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+          a.style.transform = 'perspective(900px) rotateY(' + (x * 8) + 'deg) rotateX(' + (-y * 8) + 'deg) translateY(-4px)';
+        });
+        a.addEventListener('mouseleave', () => { a.style.transform = ''; });
+      }
+    });
+  })();
+
+  /* ---------- scanlines off while project screenshots are visible ---------- */
+  (() => {
+    const crt = $('.crt'), pj = $('.pj');
+    if (!crt || !pj || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(es => crt.classList.toggle('is-off', es[0].isIntersecting), { threshold: 0 }).observe(pj);
+  })();
+
+  /* ---------- section prompts type themselves once ---------- */
+  if (!reduce) {
+    const typeCmd = head => {
+      const el = $('.typed', head);
+      const full = el.dataset.full;
+      let i = 0;
+      const caret = document.createElement('span');
+      caret.className = 'caret';
+      el.after(caret);
+      const iv = setInterval(() => {
+        i += 1;
+        el.textContent = full.slice(0, i);
+        if (i >= full.length) {
+          clearInterval(iv);
+          head.classList.remove('is-typing');
+          setTimeout(() => caret.remove(), 1400);
+        }
+      }, 38);
+    };
+    const io = new IntersectionObserver(es => es.forEach(en => {
+      if (!en.isIntersecting) return;
+      io.unobserve(en.target);
+      typeCmd(en.target);
+    }), { rootMargin: '0px 0px -12% 0px' });
+    $$('.sec .sec-head').forEach(head => {
+      const el = $('.typed', head);
+      if (!el) return;
+      el.dataset.full = el.textContent;
+      el.textContent = '';
+      head.classList.add('is-typing');
+      io.observe(head);
+    });
+  }
+
+  /* ---------- scroll choreography: each section has its own entrance ---------- */
+  if (ST && !reduce) {
+    const once = (trigger, start = 'top 84%') => ({ trigger, start, once: true });
+
+    G.to('.hero-inner', { y: -50, autoAlpha: 0.35, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+    $$('.sec-head').forEach(head => {
+      const num = $('.sec-num', head);
+      const tl = G.timeline({ scrollTrigger: once(head) });
+      tl.from($('.sec-rule', head), { scaleX: 0, duration: 1.1, ease: 'power3.inOut' }, 0);
+      if (num) {
+        tl.from(num, { autoAlpha: 0, y: 8, duration: 0.5 }, 0);
+        if (SCR) tl.to(num, { duration: 0.6, scrambleText: { text: num.textContent, chars: '0123456789', speed: 0.8 } }, 0.05);
+      }
+    });
+
+    G.from('.fetch-panel', { clipPath: 'inset(0% 0% 100% 0% round 22px)', duration: 1.1, ease: 'power3.inOut', scrollTrigger: once('.fetch-panel') });
+    G.from('.facts > *', { autoAlpha: 0, x: -10, duration: 0.45, stagger: 0.04, ease: 'power2.out', scrollTrigger: once('.facts', 'top 80%') });
+
+    if (SPLIT) {
+      $$('.about-copy, .echo-out').forEach(el => {
+        SPLIT.create(el, {
+          type: 'lines', mask: 'lines', autoSplit: true,
+          onSplit: self => G.from(self.lines, { yPercent: 110, duration: 0.9, stagger: 0.08, ease: 'power4.out', scrollTrigger: once(el, 'top 86%') })
+        });
+      });
+    }
+
+    root.classList.add('log-anim');
+    G.fromTo('.log-fill', { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '.log', start: 'top 72%', end: 'bottom 72%', scrub: 0.5 } });
+    $$('.commit').forEach(c => {
+      ST.create({ trigger: c, start: 'top 72%', onEnter: () => c.classList.add('lit'), onLeaveBack: () => c.classList.remove('lit') });
+      const tl = G.timeline({ scrollTrigger: once(c, 'top 82%') });
+      tl.from($('.commit-card', c), { autoAlpha: 0, x: -24, duration: 0.8, ease: 'power3.out' })
+        .from($$('li', c), { autoAlpha: 0, y: 8, duration: 0.4, stagger: 0.05, ease: 'power2.out' }, 0.25);
+    });
+
+    $$('.pj-card').forEach(card => G.from(card, { autoAlpha: 0, y: 36, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity,visibility', scrollTrigger: once(card, 'top 90%') }));
+    G.from('.vol .commit-card', { autoAlpha: 0, y: 30, duration: 0.8, ease: 'power3.out', scrollTrigger: once('.vol', 'top 86%') });
+    G.from('.vol li', { autoAlpha: 0, y: 8, duration: 0.4, ease: 'power2.out', delay: 0.25, scrollTrigger: once('.vol', 'top 86%') });
+
+    G.from('.bento-card', { autoAlpha: 0, y: 36, scale: 0.98, duration: 0.8, stagger: 0.08, ease: 'power3.out', scrollTrigger: once('.bento') });
+    $$('.bento-card').forEach(card => {
+      G.from($$('.skill', card), { autoAlpha: 0, y: 10, duration: 0.4, stagger: 0.035, ease: 'power2.out', scrollTrigger: once(card, 'top 80%'), delay: 0.25 });
+    });
+
+    G.from('.contact', { autoAlpha: 0, y: 40, duration: 1, ease: 'power3.out', scrollTrigger: once('.contact') });
+    G.from('.channels > *', { autoAlpha: 0, x: 24, duration: 0.6, stagger: 0.08, ease: 'power3.out', scrollTrigger: once('.channels', 'top 86%') });
+    G.from('.foot-bar', { autoAlpha: 0, y: 20, duration: 0.7, ease: 'power3.out', scrollTrigger: once('.foot-bar', 'top 96%') });
+
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ST.refresh());
+  }
+
+  /* ---------- about: numbers decode ---------- */
+  if (SCR && !reduce) {
+    const nums = $$('[data-count]');
+    const io = new IntersectionObserver(es => {
+      if (!es[0].isIntersecting) return;
+      io.disconnect();
+      nums.forEach((el, i) => {
+        const fin = el.textContent;
+        el.textContent = fin.replace(/\d/g, '0');
+        G.to(el, { duration: 1.1, delay: 0.3 + i * 0.12, scrambleText: { text: fin, chars: '0123456789', speed: 0.9, revealDelay: 0.3 } });
+      });
+    }, { rootMargin: '0px 0px -20% 0px' });
+    io.observe($('.facts'));
+  }
+
+  /* ---------- contact: copy email ---------- */
+  const live = $('#live');
+  $$('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
+    const v = btn.dataset.copy;
+    let ok = false;
+    try { await navigator.clipboard.writeText(v); ok = true; } catch (e) {
+      const ta = document.createElement('textarea');
+      ta.value = v;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+      document.body.append(ta);
+      ta.select();
+      try { ok = document.execCommand('copy'); } catch (e2) { ok = false; }
+      ta.remove();
+    }
+    const label = $('.copy-label', btn), use = $('use', btn);
+    label.textContent = ok ? 'copied' : 'copy failed';
+    if (ok && use) use.setAttribute('href', '#lu-check');
+    btn.classList.toggle('done', ok);
+    if (live) live.textContent = ok ? 'Email address copied to clipboard.' : 'Copy failed. Select the address and copy it manually.';
+    clearTimeout(btn._t);
+    btn._t = setTimeout(() => {
+      label.textContent = 'copy';
+      if (use) use.setAttribute('href', '#lu-copy');
+      btn.classList.remove('done');
+    }, 1800);
+  }));
+
+  if (ST) requestAnimationFrame(() => ST.refresh());
+
+  /* ---------- a note for whoever opens the console ---------- */
+  try {
+    console.log('%c ahmed@portfolio %c Backend Engineer · Node.js · Express · PostgreSQL', 'background:#4dff88;color:#030604;font-weight:700;padding:3px 8px;border-radius:6px', 'color:#4dff88;padding-left:8px');
+    console.log('Reading the source? Good instinct. Let’s talk → ahmedhossameissa25@gmail.com');
+  } catch (e) {}
+});
+</script>
+</body>
+</html>
