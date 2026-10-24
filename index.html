@@ -292,9 +292,18 @@
     box-shadow: 0 0 0 0 rgb(var(--glow) / 0), 0 10px 30px -12px rgb(var(--glow) / .55);
   }
   .btn--sm { min-height: 40px; padding: 0 16px; font-size: 13px; }
+  .btn--cv {
+    border-color: color-mix(in srgb, var(--amber) 70%, transparent);
+    background: color-mix(in srgb, var(--amber) 12%, var(--pane));
+    color: var(--amber); font-weight: 700;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--amber) 0%, transparent), 0 10px 28px -14px color-mix(in srgb, var(--amber) 60%, transparent);
+  }
+  .btn--cv .icon { animation: dl 2.2s var(--ease-in-out) infinite; }
+  @keyframes dl { 0%, 55%, 100% { transform: translateY(0); } 25% { transform: translateY(3px); } }
   @media (hover: hover) and (pointer: fine) {
     .btn:hover { border-color: var(--phos-2); color: var(--hot); background: var(--pane-2); }
     .btn--primary:hover { background: var(--hot); border-color: var(--hot); color: var(--void); box-shadow: 0 0 0 4px rgb(var(--glow) / .14), 0 14px 34px -12px rgb(var(--glow) / .7); }
+    .btn--cv:hover { background: var(--amber); border-color: var(--amber); color: var(--void); box-shadow: 0 0 0 4px color-mix(in srgb, var(--amber) 18%, transparent), 0 14px 34px -12px color-mix(in srgb, var(--amber) 70%, transparent); }
   }
 
   /* =========================================================
@@ -337,15 +346,16 @@
   .hero-notes { margin-top: 18px; display: grid; gap: 4px; color: var(--dim); font-size: 14px; line-height: 1.75; }
   .hero-notes p { padding-left: 3ch; text-indent: -3ch; }
   .hero-notes .cm { color: var(--phos-2); }
-  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .hero-cta .btn { padding: 0 18px; gap: 9px; }
 
   .stage { position: relative; display: grid; justify-items: center; }
-  .hacker { position: relative; width: min(480px, 100%, 56svh); aspect-ratio: 10 / 11; }
+  .hacker { position: relative; width: min(500px, 100%, 56svh); aspect-ratio: 72 / 78; }
   .hacker canvas {
     position: absolute; inset: 0; display: block; width: 100%; height: 100%;
-    filter: drop-shadow(0 0 24px rgb(var(--glow) / .3));
-    -webkit-mask-image: radial-gradient(closest-side, #000 72%, transparent 100%);
-    mask-image: radial-gradient(closest-side, #000 72%, transparent 100%);
+    filter: drop-shadow(0 0 22px rgb(var(--glow) / .28));
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
   }
 
   .scroll-cue {
@@ -561,6 +571,7 @@
     color: var(--dim); font-size: 12.5px; cursor: pointer;
     transition: color 140ms var(--ease-out), background-color 140ms var(--ease-out), border-color 140ms var(--ease-out), transform 160ms var(--ease-out);
   }
+  a.copy { text-decoration: none; }
   .copy:active { transform: scale(.96); }
   .copy.done { color: var(--phos); border-color: var(--phos-2); }
   @media (hover: hover) and (pointer: fine) {
@@ -628,7 +639,7 @@
      reduced motion: fewer, gentler
      ========================================================= */
   @media (prefers-reduced-motion: reduce) {
-    .bar-open::before, .caret, .scroll-cue .track::after { animation: none !important; }
+    .bar-open::before, .caret, .scroll-cue .track::after, .btn--cv .icon { animation: none !important; }
     .btn:active, .copy:active { transform: none; }
     .skip, .bar-ind { transition: none; }
     .pj-card, .pj-shots img, .pj-shots .pj-ph { transition: none; }
@@ -643,6 +654,8 @@
   <symbol id="lu-brain-circuit" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></symbol>
   <symbol id="lu-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
   <symbol id="lu-component" viewBox="0 0 24 24"><path d="M15.536 11.293a1 1 0 0 0 0 1.414l2.376 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z"/><path d="M2.297 11.293a1 1 0 0 0 0 1.414l2.377 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414L6.088 8.916a1 1 0 0 0-1.414 0z"/><path d="M8.916 17.912a1 1 0 0 0 0 1.415l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.415l-2.377-2.376a1 1 0 0 0-1.414 0z"/><path d="M8.916 4.674a1 1 0 0 0 0 1.414l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z"/></symbol>
+  <symbol id="lu-download" viewBox="0 0 24 24"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></symbol>
+  <symbol id="lu-file-text" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
   <symbol id="lu-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
   <symbol id="lu-cpu" viewBox="0 0 24 24"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></symbol>
   <symbol id="lu-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
@@ -729,6 +742,7 @@
             <a class="btn btn--primary" href="#projects">view projects</a>
             <a class="btn" href="https://github.com/AhmedHossamEissa1" target="_blank" rel="noopener"><svg class="logo" aria-hidden="true"><use href="#si-github"/></svg>github</a>
             <a class="btn" href="mailto:ahmedhossameissa25@gmail.com"><svg class="icon" aria-hidden="true"><use href="#lu-mail"/></svg>hire me</a>
+            <a class="btn btn--cv" href="files/Ahmed%20Hossam%20-%20Node.js%20Backend%20Engineer.pdf" download target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#lu-download"/></svg>download cv</a>
           </div>
         </div>
 
@@ -970,6 +984,10 @@
           <div class="channel-row">
             <a class="channel" href="mailto:ahmedhossameissa25@gmail.com"><span class="ch-ico"><svg class="icon" aria-hidden="true"><use href="#lu-mail"/></svg></span><span class="txt"><span class="lab">mail</span><span class="val">ahmedhossameissa25@gmail.com</span></span><span></span></a>
             <button type="button" class="copy" data-copy="ahmedhossameissa25@gmail.com" aria-label="Copy email address"><svg class="icon" aria-hidden="true"><use href="#lu-copy"/></svg><span class="copy-label">copy</span></button>
+          </div>
+          <div class="channel-row">
+            <a class="channel" href="files/Ahmed%20Hossam%20-%20Node.js%20Backend%20Engineer.pdf" target="_blank" rel="noopener"><span class="ch-ico"><svg class="icon" aria-hidden="true"><use href="#lu-file-text"/></svg></span><span class="txt"><span class="lab">resume</span><span class="val">Node.js Backend Engineer (PDF)</span></span><svg class="icon go" aria-hidden="true"><use href="#lu-arrow-up-right"/></svg></a>
+            <a class="copy" href="files/Ahmed%20Hossam%20-%20Node.js%20Backend%20Engineer.pdf" download aria-label="Download resume as PDF"><svg class="icon" aria-hidden="true"><use href="#lu-download"/></svg><span class="copy-label">download</span></a>
           </div>
           <a class="channel" href="tel:+201060919723"><span class="ch-ico"><svg class="icon" aria-hidden="true"><use href="#lu-phone"/></svg></span><span class="txt"><span class="lab">phone</span><span class="val">+20 106 091 9723</span></span><span></span></a>
           <a class="channel" href="https://www.linkedin.com/in/ahmed-hossam-a426aa2b1/" target="_blank" rel="noopener"><span class="ch-ico"><svg class="icon" aria-hidden="true"><use href="#lu-linkedin"/></svg></span><span class="txt"><span class="lab">linkedin</span><span class="val">in/ahmed-hossam-a426aa2b1</span></span><svg class="icon go" aria-hidden="true"><use href="#lu-arrow-up-right"/></svg></a>
@@ -1317,308 +1335,394 @@ window.addEventListener('DOMContentLoaded', () => {
     };
   })();
 
-  /* ---------- the hacker, built from glowing cubes ---------- */
+  /* ---------- the hacker: a pixel-art sprite drawn in glowing phosphor cells ---------- */
   const hacker = $('.hacker');
   const hackerFx = (() => {
     const cv = $('#hacker-canvas');
     const ctx = cv && cv.getContext ? cv.getContext('2d') : null;
     if (!hacker || !ctx) return null;
 
-    /* ---- model: a grid of unit cubes (x right, y up, z toward the viewer) ---- */
-    const map = new Map();
-    const kk = (x, y, z) => x + ',' + y + ',' + z;
-    const put = (x, y, z, t) => map.set(kk(x, y, z), { x, y, z, t });
-    let seed = 11;
+    /* Hooded hacker, headphones on, gripping a laptop (lid faces us, ">_" on the back).
+       One letter = one cell. Letters map to phosphor shades in palette() below. */
+    const ART = [
+      "........................................................................",
+      "........................................................................",
+      "................................RRRRRRRRR...............................",
+      "..............................RRPpppppppPRR.............................",
+      "............................RRpppaaaaaaapppRR...........................",
+      "..........................RRppaaaaaaaaaaaaapPRR.........................",
+      ".........................RPppaaaabbbbbbbaaaappPR........................",
+      "........................RPppbbbbbbbbbbbbbbbaappPR.......................",
+      ".......................RPpabbbbbbbbaaaaaaabbcaapPR......................",
+      ".......................RpbbbbbbbbaaaaaaaaaaabcaapR......................",
+      "......................RpbbbbbbbaaaaaaaaaaaaaaaccapR.....................",
+      ".....................RPpbbbbbbaaaaaaaaaaaaaaaaaccpPR....................",
+      ".....................RpabbbbbaaaaaaaaaaaaaaaaaaacapR....................",
+      "....................RppbbbbbaaaaacccccccaaaaaaaaacppR...................",
+      "....................rpabbbbaaaacccdddddcccaaaaaaaccpr...................",
+      "...................rPpbbbbaaacccdddddddddcccaaaaaacppr..................",
+      "...................rpabbbbaaccdddddddddddddccaaaaacapr..................",
+      "...................rpbbbbaaccdddddddddddddddccaaaaacpr..................",
+      "..................rPpbbbbaacdddddddddddddddddcaaaaacpPr.................",
+      "..................rpabbbaacadddddddddddddddddacaaaaaapr.................",
+      "..................rpbbbbaccdddddddddddddddddddccaaaaapr.................",
+      "..................rpbbbbacdddddddddddddddddddddcaaaaapr.................",
+      "................rrpppppaacdddddddddddddddddddddcaappppprr...............",
+      "................rPPPPPpacadddddddddddddddddddddacapPPPPPr...............",
+      "................rPPPPPpacdddddddddddddddddddddddcapPPPPPr...............",
+      "................rPpppPpacdddddddddddddddddddddddcapPpppPr...............",
+      "................rPpppPpacdddddddddddddddddddddddcapPpppPr...............",
+      "................rPpgpPpacdddddddddddddddddddddddcapPpgpPr...............",
+      "................rPpgpPpacdddddddddddddddddddddddcapPpgpPr...............",
+      "................rPpgpPpacdddddddddddddddddddddddcapPpgpPr...............",
+      "................rPpppPpacdddddddddddddddddddddddcapPpppPr...............",
+      "................rPpppPpbcdddddddddddddddddddddddcapPpppPr...............",
+      "................rPPPPPpqcdddddddddddddddddddddddcapPPPPPr...............",
+      "................rPPPPPpqcadfdfdfdfdfdfdfdfdfdfdacapPPPPPr...............",
+      "................rrrrrrpbqcddfdfdfdfdddfdfdfdfddcaapprrrrr...............",
+      "......................rbbcdddfdfdfdfdfdfdfdfdddcaaar....................",
+      "......................rabcadFdfdFdfdFdfdFdfdFdacaar.....................",
+      ".......................rabaadfdFdddddddddfdFdaaaaar.....................",
+      "........................raqaddFdfdFdfdFdfdFddaqaar......................",
+      ".........................rqbaddfdFFFFFFFdFddaaqar.......................",
+      "..........................rqbadFFdfdFdfdFFdaaqar........................",
+      "...........................rqqqqqqqqqqqqqqqqqqr.........................",
+      "...........................rqqqqqqqqqqqqqqqqqr..........................",
+      "........................rrrqqqqqqqqqqqqqqqqqqqrrr.......................",
+      "......................rrabbqqqqqcqqqqqqqcqqqqqbbarr.....................",
+      "...................rrrbbbbqqqqqqcqqqqqqqcqqqqqqbbbbrrr..................",
+      "..................rabbbbbbbbbaaacaaaaaaacaaabbbbbbbbbar.................",
+      ".................rabbbbbbbbaaaaacaaaaaaacaaaaabbbbbbbbar................",
+      "................rabbbbbbaaaaaaacaaaaaaaaacaaaaaaabbbbbbar...............",
+      "...............rabbnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnbbar..............",
+      "..............rbbbbnNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNnbbbbr.............",
+      "..............rbbbbnlmmmmmmmlmmmlllllllllllllllllllllnbbbbr.............",
+      ".............rcccccnlmmmmmmlmmmllllllllllllllllllslllncccccr............",
+      ".............rccccnllmmmmmmlmmmllllllllllllllllsssssllnccccr............",
+      "............rbcchhhhHmmmmmmlmmmglllllllllllllllssgssHhhhhccbr...........",
+      "............RcccHiiiimmsssssmmgggllllllllllllllsssssiiiiHcccR...........",
+      "...........RbccchcnlmmmmmmlmmmlggglllllllllllllsssssllnchcccbR..........",
+      "...........RhhhhhhhhhHmssssmmmlllggglllllllllllllslHhhhhhhhhhR..........",
+      "...........hihhhHiiiiimmmlmmmlllllggglllllllllllllliiiiiHhhhih..........",
+      "..........RiihhhhnllmmmmmlmmmllllggglllllllllllllllllllnhhhhiiR.........",
+      "..........iiihhhhhhhhHmmmlmmmllggglllllllllllllllllHhhhhhhhhiii.........",
+      ".....U....iiihhhHiiiiimmlmmmllgggllllgggggggllllllliiiiiHhhhiii.........",
+      "...UUUUU..iiihhhhhlmmmmmlmmmlllglllllggggggglllllllllllhhhhhiii.........",
+      "...uuuuu..iiihhhhhhhHmmmlmmmllllllllllllllllllllllllHhhhhhhhiii.UUUUUu..",
+      "...ggggg..iiihhhHiiiimmlmmmllllllllllllllllllllllllliiiiHhhhiii.UUUUUu..",
+      "...uuuuu..iiihhhhnlmmmmlmmmllllllllllllllllllllllllllllnhhhhiii.Uuuuuuu.",
+      "...uuuuu..iiihhhhhmmmmmmmmmmmmmmmmmmgmmmmmmmmmmmmmmmmmmhhhhhiii.Uuuuuu.u",
+      "...uuuuu..RahhhcnmhHmmnmmnmmnmmnmmnmmnmmnmmnmmnmmnmmnHhmnchhhaR.Uuuuuu.u",
+      "...UUUUU..RRbhqqnmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmnqqhbRR.Uuuuuuu.",
+      "...uuuuu....RRbnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnbRR...Uuuuuu..",
+      "...uuuuu......mmmmmmmmmmmmmmmmmmlllllllllmmmmmmmmmmmmmmmmmm.....Uuuuuu..",
+      "kkkkkkkkkkkkkNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNkkkkkkkkkkkk",
+      "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
+      "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+      "JjjjJjjjJjjjJjjjJjjjJjjjJjjjJjjjJjjjJjjjJjjjJjjjJjjjJjjjJjjjJjjjJjjjJjjj",
+      "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+      "jjJjjjjjjjJjjjjjjjJjjjjjjjJjjjjjjjJjjjjjjjJjjjjjjjJjjjjjjjJjjjjjjjJjjjjj",
+      "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"
+    ];
+    const GW = ART[0].length, GH = ART.length;
+
+    /* ---- parse into cells, grouped by material ---- */
+    let seed = 7;
     const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-
-    // torso (hoodie)
-    const HW = [9, 9, 9, 9, 9, 8.6, 7.6, 6.2, 4.2];
-    for (let y = 0; y < HW.length; y++)
-      for (let x = -10; x <= 10; x++)
-        for (let z = -5; z <= 5; z++)
-          if ((x / HW[y]) ** 2 + (z / 4.3) ** 2 <= 1) put(x, y, z, 'cloth');
-    // hood
-    for (let y = 5; y <= 21; y++)
-      for (let x = -7; x <= 7; x++)
-        for (let z = -6; z <= 7; z++)
-          if ((x / 6.3) ** 2 + ((y - 13) / 6.9) ** 2 + ((z - 0.5) / 5.6) ** 2 <= 1) put(x, y, z, 'hood');
-    // the opening of the hood: a deep tunnel, dark walls
-    for (let y = 6; y <= 20; y++)
-      for (let x = -6; x <= 6; x++)
-        for (let z = 3; z <= 7; z++) {
-          const k = kk(x, y, z);
-          if (!map.has(k)) continue;
-          if ((x / 4) ** 2 + ((y - 12.6) / 5) ** 2 <= 1) map.delete(k);
-          else if (z <= 5 && (x / 5.2) ** 2 + ((y - 12.6) / 6.2) ** 2 <= 1) map.get(k).t = 'inner';
+    const cells = [];
+    const rowCells = Array.from({ length: GH }, () => []);
+    ART.forEach((row, y) => {
+      for (let x = 0; x < GW; x++) {
+        const ch = row[x];
+        if (ch === '.') continue;
+        const c = { x, y, ch, key: ch, td: 0 };
+        if (ch === 'h' || ch === 'i' || ch === 'H') c.key = ch + (x < GW / 2 ? 'L' : 'R');
+        else if (ch === 'g') {
+          if (y >= 61 && y <= 62 && x >= 37 && x <= 43) c.key = 'cursor';
+          else if ((x === 19 || x === 53) && y >= 27 && y <= 29) c.key = x < GW / 2 ? 'eqL' : 'eqR';
         }
-    // the face: a screen of falling code at the bottom of the tunnel
-    for (let y = 7; y <= 18; y++)
-      for (let x = -4; x <= 4; x++)
-        if ((x / 4) ** 2 + ((y - 12.6) / 5) ** 2 <= 1 && map.has(kk(x, y, 2))) map.get(kk(x, y, 2)).t = 'code';
-    // hoodie strings and zipper
-    const front = (x, y) => { for (let z = 6; z >= -6; z--) if (map.has(kk(x, y, z))) return z; return null; };
-    const trim = (x, y) => { const z = front(x, y); if (z !== null && map.get(kk(x, y, z)).t === 'cloth') map.get(kk(x, y, z)).t = 'trim'; };
-    for (const x of [-2, 2]) for (let y = 1; y <= 5; y++) trim(x, y);
-    for (let y = 0; y <= 6; y += 2) trim(0, y);
-
-    // laptop: base, keys, and a lid that faces the viewer
-    const lidZ = y => Math.round(13 - (y - 1) * 0.2);
-    for (let x = -5; x <= 5; x++) {
-      for (let z = 6; z <= 13; z++) put(x, 0, z, 'lid');
-      for (let z = 7; z <= 10; z++) if ((x + z) % 2 === 0 && Math.abs(x) <= 4) put(x, 1, z, 'key');
-      for (let y = 1; y <= 8; y++) { put(x, y, lidZ(y), 'lid'); put(x, y, lidZ(y) - 1, 'lid'); }
-    }
-    for (let y = 1; y <= 8; y++)
-      for (let x = -5; x <= 5; x++)
-        if (x === -5 || x === 5 || y === 8) for (const z of [lidZ(y), lidZ(y) - 1]) map.get(kk(x, y, z)).t = 'rim';
-    for (const [lx, ly] of [[-2, 6], [-1, 5], [-2, 4], [0, 4], [1, 4]]) put(lx, ly, lidZ(ly) + 1, 'logo'); // ">_"
-
-    // arms reaching for the keyboard
-    const capsule = (a, b, r) => {
-      const dx = b[0] - a[0], dy = b[1] - a[1], dz = b[2] - a[2], L2 = dx * dx + dy * dy + dz * dz;
-      for (let x = Math.floor(Math.min(a[0], b[0]) - r - 1); x <= Math.ceil(Math.max(a[0], b[0]) + r + 1); x++)
-        for (let y = Math.floor(Math.min(a[1], b[1]) - r - 1); y <= Math.ceil(Math.max(a[1], b[1]) + r + 1); y++)
-          for (let z = Math.floor(Math.min(a[2], b[2]) - r - 1); z <= Math.ceil(Math.max(a[2], b[2]) + r + 1); z++) {
-            const u = Math.max(0, Math.min(1, ((x - a[0]) * dx + (y - a[1]) * dy + (z - a[2]) * dz) / L2));
-            if (Math.hypot(x - (a[0] + u * dx), y - (a[1] + u * dy), z - (a[2] + u * dz)) <= r && !map.has(kk(x, y, z))) put(x, y, z, 'cloth');
-          }
-    };
-    for (const s of [-1, 1]) {
-      capsule([s * 8, 5, 0], [s * 7.5, 3.2, 4], 1.5);
-      capsule([s * 7.5, 3.2, 4], [s * 3.4, 2.2, 7.5], 1.4);
-      for (const [hx, hz] of [[3, 8], [4, 8], [3, 9], [4, 9]]) put(s * hx, 2, hz, 'hand');
-    }
-
-    /* ---- bake: exposed faces only, kinds, build-in animation data ---- */
-    const N = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
-    const FACE = [[1, 3, 7, 5], [0, 4, 6, 2], [2, 3, 7, 6], [0, 1, 5, 4], [4, 5, 7, 6], [0, 2, 3, 1]];
-    const KIND = { code: 1, hand: 2, key: 3, trim: 4, rim: 4, logo: 4 };
-    const EMIT = { trim: 0.5, rim: 0.9, logo: 1 };
-    const V = [];
-    map.forEach(v => {
-      let m = 0;
-      for (let f = 0; f < 6; f++) if (!map.has(kk(v.x + N[f][0], v.y + N[f][1], v.z + N[f][2]))) m |= 1 << f;
-      if (!m) return;
-      v.m = m; v.k = KIND[v.t] || 0; v.e = EMIT[v.t] || 0; v.r = rnd();
-      v.d = (v.y + 22) / 46 * 0.9 + rnd() * 0.45;
-      v.sx = (rnd() - 0.5) * 56; v.sy = 16 + rnd() * 32; v.sz = (rnd() - 0.5) * 56;
-      v.g = v.x < 0 ? 0 : 1; v.hit = 0; v.ii = 0; v.c = null;
-      V.push(v);
+        c.td = (1 - y / GH) * 1.0 + rnd() * 0.45;
+        cells.push(c);
+        rowCells[y].push(c);
+      }
     });
-    const codeV = V.filter(v => v.k === 1), keyV = V.filter(v => v.k === 3);
-    const NV = V.length, NO = 9;
-    const orbs = Array.from({ length: NO }, (_, i) => ({
-      k: 5, m: 63, rx: 9.6 + rnd() * 2.2, rz: 7 + rnd() * 2.6, y0: 11 + rnd() * 10,
-      sp: (0.35 + rnd() * 0.5) * (i % 2 ? 1 : -1), ph: rnd() * 6.28, hot: i % 3 === 0, x: 0, y: 0, z: 0
-    }));
+    const groups = [];
+    const gmap = new Map();
+    cells.forEach(c => {
+      let g = gmap.get(c.key);
+      if (!g) { g = { key: c.key, ch: c.ch, cells: [], fill: '' }; gmap.set(c.key, g); groups.push(g); }
+      g.cells.push(c);
+    });
+    const GLOW = { g: 0.9, cursor: 0.9, eqL: 0.9, eqR: 0.9, R: 0.4, r: 0.2, n: 0.26, N: 0.5, F: 0.24, H: 0.42, k: 0.16 };
 
-    const nrm = a => { const l = Math.hypot(a[0], a[1], a[2]); return [a[0] / l, a[1] / l, a[2] / l]; };
-    const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-    const L1 = nrm([-0.4, 0.9, 0.5]), L2 = nrm([0.8, 0.2, -0.6]), LAMP = [0, 9, 8];
-    const mix = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
-    const rgb = c => 'rgb(' + (c[0] | 0) + ',' + (c[1] | 0) + ',' + (c[2] | 0) + ')';
-    const FS = [0.78, 0.5, 1, 0.3, 0.66, 0.4];
-    let edge = '', spP = null, spH = null;
-
-    function sprite(c) {
+    /* ---- colours (follow the green / amber phosphor switch) ---- */
+    const mixc = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+    const rgbs = c => 'rgb(' + (c[0] | 0) + ',' + (c[1] | 0) + ',' + (c[2] | 0) + ')';
+    let HOT = '#fff', sprP = null, sprH = null;
+    function mkSprite(col, n) {
       const s = document.createElement('canvas');
-      s.width = s.height = 64;
-      const x = s.getContext('2d'), g = x.createRadialGradient(32, 32, 0, 32, 32, 32);
-      g.addColorStop(0, `rgba(${c.join(',')},1)`);
-      g.addColorStop(0.25, `rgba(${c.join(',')},.42)`);
-      g.addColorStop(1, `rgba(${c.join(',')},0)`);
+      s.width = s.height = n;
+      const x = s.getContext('2d');
+      const g = x.createRadialGradient(n / 2, n / 2, 0, n / 2, n / 2, n / 2);
+      g.addColorStop(0, 'rgba(' + col.join(',') + ',.6)');
+      g.addColorStop(0.35, 'rgba(' + col.join(',') + ',.16)');
+      g.addColorStop(1, 'rgba(' + col.join(',') + ',0)');
       x.fillStyle = g;
-      x.fillRect(0, 0, 64, 64);
+      x.fillRect(0, 0, n, n);
       return s;
     }
+    let CP = null;
     function bake() {
-      const P = C.phosA, K1 = C.clothA, K2 = C.foldA;
-      edge = `rgba(${C.phosRgb},.34)`;
-      spP = sprite(P);
-      spH = sprite(C.hotA);
-      for (const v of V) {
-        if (v.k !== 0 && v.k !== 4) continue;
-        v.c = [];
-        const g = Math.exp(-Math.hypot(v.x - LAMP[0], (v.y - LAMP[1]) * 0.8, v.z - LAMP[2]) / 11);
-        for (let f = 0; f < 6; f++) {
-          if (!(v.m & (1 << f))) { v.c[f] = null; continue; }
-          const n = N[f];
-          const dif = Math.max(0, dot(n, L1)) * 0.6 + Math.max(0, dot(n, L2)) * 0.25 + 0.04;
-          if (v.k === 4) { v.c[f] = rgb(mix(K1, P, v.e * (0.5 + 0.5 * dif / 0.85))); continue; }
-          let base = mix(K1, K2, v.r), km = 1;
-          if (v.t === 'inner') { base = base.map(c => c * 0.55); km = 0.3; }
-          else if (v.t === 'lid') { base = K1.map(c => c * 0.7); km = 0.22; }
-          const k = Math.min(0.8, km * (0.04 + 0.36 * dif + 0.46 * g * g * (0.4 + 0.6 * Math.max(0, n[1] * 0.5 + 0.5))));
-          v.c[f] = rgb(mix(base, P, k));
-        }
+      const ph = C.phosA, hh = C.hotA, cl = C.clothA, fo = C.foldA, V = C.voidRgb.split(',').map(Number);
+      const lit = t => mixc(fo, ph, t);
+      const P = {
+        a: lit(0.03), b: lit(0.15), c: lit(0.34), q: mixc(V, cl, 0.6), d: V,
+        f: lit(0.4), F: lit(0.72), r: mixc(V, ph, 0.78), R: ph,
+        l: mixc(V, cl, 0.9), m: lit(0.18), n: mixc(V, ph, 0.78), N: mixc(ph, hh, 0.25), g: ph, s: lit(0.42),
+        h: lit(0.5), i: lit(0.2), H: mixc(ph, hh, 0.5),
+        k: mixc(V, ph, 0.78), j: mixc(V, cl, 0.8), J: mixc(V, fo, 0.9),
+        u: lit(0.36), U: lit(0.7), p: mixc(cl, fo, 0.9), P: lit(0.26)
+      };
+      CP = P;
+      groups.forEach(g => { g.fill = rgbs(P[g.ch] || ph); });
+      HOT = rgbs(hh);
+    }
+
+    /* ---- canvas ---- */
+    let cw = 0, chh = 0, dpr = 1, cell = 8, ox = 0, oy = 0, pad = 1;
+    function size() {
+      const r = hacker.getBoundingClientRect();
+      cw = Math.max(1, Math.round(r.width)); chh = Math.max(1, Math.round(r.height));
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(cw * dpr); cv.height = Math.round(chh * dpr);
+      cell = Math.min(cw / GW, chh / GH);
+      pad = cell * 0.09;
+      ox = (cw - cell * GW) / 2; oy = (chh - cell * GH) / 2;
+      const n = Math.max(16, Math.ceil(cell * 4 * dpr));
+      sprP = mkSprite(C.phosA, n); sprH = mkSprite(C.hotA, n);
+    }
+
+    /* ---- little 3x5 glyphs that float up around him ---- */
+    const GLYPH = {
+      '0': ['###', '#.#', '#.#', '#.#', '###'], '1': ['.#.', '##.', '.#.', '.#.', '###'],
+      '<': ['..#', '.#.', '#..', '.#.', '..#'], '>': ['#..', '.#.', '..#', '.#.', '#..'],
+      '/': ['..#', '..#', '.#.', '#..', '#..'], '{': ['.##', '.#.', '##.', '.#.', '.##'],
+      '}': ['##.', '.#.', '.##', '.#.', '##.'], '$': ['.##', '##.', '.#.', '.##', '##.'],
+      ';': ['...', '.#.', '...', '.#.', '#..'], '#': ['#.#', '###', '#.#', '###', '#.#'],
+      '=': ['...', '###', '...', '###', '...'], '_': ['...', '...', '...', '...', '###']
+    };
+    const GKEYS = Object.keys(GLYPH);
+    const bits = [], steam = [];
+
+    /* ---- state ---- */
+    let T = 0, still = false, booted = false;
+    let nextBit = 1.8, nextSteam = 1.2, nextTap = 1.4, nextGlitch = 3.2, glitchAt = -9, glitchY = 30;
+    let nextBlink = 3, blinkAt = -9, nextGlance = 2.5, idleDx = 0, idleDy = 0, eyeDx = 0, eyeDy = 0;
+    let faceBoost = 0, eqL = 1, eqR = 1, eqAt = 0;
+    const tap = { L: 0, R: 0 };
+    const rowOx = new Int8Array(GH);
+
+    function eyeLook() {
+      if (ptr.on && !still) {
+        const r = hacker.getBoundingClientRect();
+        const dx = ptr.x - (r.left + r.width / 2), dy = ptr.y - (r.top + r.height * 0.35);
+        eyeDx = dx < -r.width * 0.14 ? -1 : dx > r.width * 0.14 ? 1 : 0;
+        eyeDy = dy < -r.height * 0.22 ? -1 : dy > r.height * 0.3 ? 1 : 0;
+      } else {
+        eyeDx = idleDx; eyeDy = idleDy;
       }
     }
 
-    /* ---- canvas + camera ---- */
-    const D = 75, C0 = [0, 9.5, 4];
-    let cw = 0, ch = 0, dpr = 1, U = 10, ox = 0, oy = 0;
-    function size() {
-      const r = hacker.getBoundingClientRect();
-      cw = Math.max(1, Math.round(r.width)); ch = Math.max(1, Math.round(r.height));
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      cv.width = Math.round(cw * dpr); cv.height = Math.round(ch * dpr);
-      U = Math.min(cw / 30, ch / 29);
-      ox = cw / 2; oy = ch * 0.5;
-    }
-
-    const X = new Float32Array(NV + NO), Y = new Float32Array(NV + NO), Z = new Float32Array(NV + NO);
-    const SC = new Float32Array(NV + NO), AL = new Float32Array(NV + NO), DEP = new Float32Array(NV + NO);
-    const idx = new Int32Array(NV + NO);
-    const PX = new Float32Array(8), PY = new Float32Array(8);
-    const heads = Array.from({ length: 9 }, () => 8 + Math.random() * 12), speeds = heads.map(() => 5 + Math.random() * 7);
-    let T = 0, yaw = 0.2, pitch = 0.2, nextKey = 0, nextGlitch = 3, glitchAt = -9, glitchY = 10, glitchAmp = 1, still = false;
-
     function draw(dt) {
-      const cyw = Math.cos(yaw), syw = Math.sin(yaw), cpt = Math.cos(pitch), spt = Math.sin(pitch);
-      const EX = [cyw, syw * spt, -syw * cpt], EY = [0, cpt, spt], EZ = [syw, -cyw * spt, cyw * cpt];
-      const NR = [EX, EX.map(c => -c), EY, EY.map(c => -c), EZ, EZ.map(c => -c)];
-      const proj = (x, y, z, out, k) => {
-        const rx = x - C0[0], ry = y - C0[1], rz = z - C0[2];
-        const x1 = rx * cyw + rz * syw, z1 = -rx * syw + rz * cyw;
-        const X2 = x1, Y2 = ry * cpt - z1 * spt, Z2 = ry * spt + z1 * cpt, p = D / (D - Z2);
-        out[k] = ox + X2 * U * p; out[k + 1] = oy - Y2 * U * p;
-      };
-
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.globalAlpha = 1;
       ctx.globalCompositeOperation = 'source-over';
-      ctx.clearRect(0, 0, cw, ch);
+      ctx.clearRect(0, 0, cw, chh);
 
-      // soft light behind the hood and on the floor
-      let g = ctx.createRadialGradient(ox, oy - 3 * U, 0, ox, oy - 3 * U, U * 15);
-      g.addColorStop(0, `rgba(${C.glow.split(',').join(',')},.16)`);
-      g.addColorStop(1, `rgba(${C.glow.split(',').join(',')},0)`);
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, cw, ch);
-
-      // floor grid
-      const fp = new Float32Array(2), fq = new Float32Array(2);
-      ctx.lineWidth = 1;
-      for (let i = -12; i <= 12; i += 4) {
-        ctx.strokeStyle = `rgba(${C.phosRgb},${i === 0 ? 0.3 : 0.15})`;
-        proj(i, -0.5, -12, fp, 0); proj(i, -0.5, 12, fq, 0);
-        ctx.beginPath(); ctx.moveTo(fp[0], fp[1]); ctx.lineTo(fq[0], fq[1]); ctx.stroke();
-        proj(-12, -0.5, i, fp, 0); proj(12, -0.5, i, fq, 0);
-        ctx.beginPath(); ctx.moveTo(fp[0], fp[1]); ctx.lineTo(fq[0], fq[1]); ctx.stroke();
+      /* ---- scheduling (all of it skipped for reduced motion) ---- */
+      if (!still) {
+        if (T > nextTap) {
+          const s = Math.random() < 0.5 ? 'L' : 'R';
+          tap[s] = 0.09; faceBoost = 1;
+          nextTap = T + 0.06 + Math.random() * 0.2;
+        }
+        tap.L = Math.max(0, tap.L - dt); tap.R = Math.max(0, tap.R - dt);
+        faceBoost = Math.max(0, faceBoost - dt * 4);
+        if (T > nextBlink) { blinkAt = T; nextBlink = T + 2.6 + Math.random() * 3.6; }
+        if (T > nextGlance) { idleDx = (Math.random() * 3 | 0) - 1; idleDy = Math.random() < 0.6 ? 0 : (Math.random() < 0.5 ? -1 : 1); nextGlance = T + 1.8 + Math.random() * 2.6; }
+        if (T > nextGlitch) { glitchAt = T; glitchY = 8 + (Math.random() * 56 | 0); nextGlitch = T + 3 + Math.random() * 4; }
+        if (T > eqAt) { eqL = Math.random() < 0.5 ? 0 : 1; eqR = Math.random() < 0.5 ? 0 : 1; eqAt = T + 0.13; }
+        eyeLook();
+        // floating glyphs
+        if (T > nextBit && bits.length < 16) {
+          const left = Math.random() < 0.5;
+          bits.push({
+            x: left ? -1 + Math.random() * 12 : 58 + Math.random() * 12, y: 52 + Math.random() * 14,
+            vx: (Math.random() - 0.5) * 1.1, vy: -(2 + Math.random() * 3.2), g: GKEYS[(Math.random() * GKEYS.length) | 0],
+            t: 0, life: 3.2 + Math.random() * 2.2, ph: Math.random() * 6.28
+          });
+          nextBit = T + 0.22 + Math.random() * 0.3;
+        }
+        for (let i = bits.length - 1; i >= 0; i--) {
+          const b = bits[i];
+          b.t += dt; b.y += b.vy * dt; b.x += (b.vx + Math.sin(b.t * 2 + b.ph) * 0.8) * dt;
+          if (b.t > b.life) bits.splice(i, 1);
+        }
+        if (T > nextSteam) { steam.push({ x: 67 + (Math.random() * 2 | 0), y: 62, t: 0, ph: Math.random() * 6.28 }); nextSteam = T + 0.32; }
+        for (let i = steam.length - 1; i >= 0; i--) {
+          const s = steam[i];
+          s.t += dt; s.y -= 4.2 * dt;
+          if (s.t > 1.5) steam.splice(i, 1);
+        }
       }
 
-      // transforms for every cube
-      const bob = still ? 0 : Math.sin(T * 1.3) * 0.18;
-      const glitching = !still && T - glitchAt < 0.16;
-      const sweep = (!still && T % 6 < 1.9) ? (T % 6) / 1.9 * 24 - 3 : -99;
-      let cnt = 0;
-      for (let i = 0; i < NV + NO; i++) {
-        let wx, wy, wz, sc = 0.94, al = 1;
-        if (i < NV) {
-          const v = V[i];
-          const a = Math.min(1, Math.max(0, (T - v.d) / 0.85));
-          if (a <= 0.001) { AL[i] = 0; continue; }
-          const e = a >= 1 ? 1 : 1 + 2.7 * (a - 1) ** 3 + 1.7 * (a - 1) ** 2, f = 1 - e;
-          wx = v.x + v.sx * f; wy = v.y + v.sy * f + bob; wz = v.z + v.sz * f;
-          if (v.k === 2 && !still) wy += Math.max(0, Math.sin(T * 13 + v.g * 2.1)) * 0.5;
-          if (glitching && Math.abs(v.y - glitchY) < 1.6) wx += (v.r < 0.5 ? -1 : 1) * glitchAmp;
-          if (a < 1) { sc *= 0.35 + 0.65 * Math.min(1, e); al = a; }
-        } else {
-          const o = orbs[i - NV], a = Math.min(1, Math.max(0, (T - 1.5 - (i - NV) * 0.12) / 0.5));
-          if (a <= 0.001) { AL[i] = 0; continue; }
-          const an = o.ph + o.sp * T;
-          o.x = o.rx * Math.cos(an); o.z = 2 + o.rz * Math.sin(an); o.y = o.y0 + 1.3 * Math.sin(T * 1.3 + o.ph);
-          wx = o.x; wy = o.y + bob; wz = o.z; sc = 0.78; al = a;
-        }
-        const rx = wx - C0[0], ry = wy - C0[1], rz = wz - C0[2];
-        const x1 = rx * cyw + rz * syw, z1 = -rx * syw + rz * cyw;
-        X[i] = x1; Y[i] = ry * cpt - z1 * spt; Z[i] = ry * spt + z1 * cpt;
-        SC[i] = sc; AL[i] = al;
-        DEP[i] = X[i] * X[i] + Y[i] * Y[i] + (D - Z[i]) * (D - Z[i]);
-        idx[cnt++] = i;
-      }
-      const order = idx.subarray(0, cnt);
-      order.sort((a, b) => DEP[b] - DEP[a]);
+      /* ---- soft light behind the hood ---- */
+      const cxm = ox + cell * GW / 2, cym = oy + cell * 30;
+      const bg = ctx.createRadialGradient(cxm, cym, 0, cxm, cym, cell * 36);
+      bg.addColorStop(0, 'rgba(' + C.glow + ',.16)');
+      bg.addColorStop(1, 'rgba(' + C.glow + ',0)');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, cw, chh);
 
-      // living parts: code rain on the face, typing keys
-      for (let c = 0; c < 9; c++) {
-        heads[c] -= speeds[c] * dt;
-        if (heads[c] < 4) { heads[c] = 18 + Math.random() * 10; speeds[c] = 5 + Math.random() * 7; }
+      /* ---- floating glyphs (behind him, drift with the pointer) ---- */
+      if (!still && T > 1.7) {
+        const shift = ptr.on ? (ptr.x / innerWidth - 0.5) * 5 : 0;
+        ctx.fillStyle = rgbs(CP.R);
+        for (const b of bits) {
+          const k = b.t / b.life;
+          const a = Math.min(1, b.t / 0.5, (1 - k) / 0.35) * 0.55;
+          if (a <= 0.02) continue;
+          ctx.globalAlpha = a;
+          const rows = GLYPH[b.g];
+          for (let gy = 0; gy < 5; gy++) for (let gx = 0; gx < 3; gx++) {
+            if (rows[gy][gx] !== '#') continue;
+            ctx.fillRect(ox + (Math.round(b.x + shift) + gx) * cell + pad, oy + (Math.round(b.y) + gy) * cell + pad, cell - pad * 2, cell - pad * 2);
+          }
+        }
+        ctx.globalAlpha = 1;
       }
-      if (still) { for (let c = 0; c < 9; c++) heads[c] = 18 - c * 1.7; }
-      for (const v of codeV) {
-        const d = v.y - heads[v.x + 4];
-        const trail = d >= 0 && d < 10 ? (1 - d / 10) ** 1.3 : 0;
-        v.ii = Math.max(trail, 0.14 + 0.08 * Math.sin(T * 3 + v.r * 20));
+
+      /* ---- rows glitching sideways ---- */
+      rowOx.fill(0);
+      if (!still && T - glitchAt < 0.14) {
+        for (let y = glitchY - 2; y <= glitchY + 2; y++) if (y >= 0 && y < GH) rowOx[y] = (y % 2 ? 1 : -1) * (Math.random() < 0.5 ? 1 : 2);
       }
-      if (!still && T > nextKey && keyV.length) { keyV[(Math.random() * keyV.length) | 0].hit = 1; nextKey = T + 0.07 + Math.random() * 0.12; }
-      for (const v of keyV) v.hit = Math.max(0, v.hit - dt * 5);
 
-      const pulse = 0.85 + 0.15 * Math.sin(T * 2.2);
-      ctx.lineJoin = 'round';
-      ctx.lineWidth = Math.max(0.6, U * 0.045);
-      for (let q = 0; q < cnt; q++) {
-        const i = order[q], isV = i < NV, v = isV ? V[i] : orbs[i - NV];
-        const x = X[i], y = Y[i], z = Z[i], s = SC[i] * 0.5, p = D / (D - z), al = AL[i];
-        for (let k = 0; k < 8; k++) {
-          const sx = k & 1 ? s : -s, sy = k & 2 ? s : -s, sz = k & 4 ? s : -s;
-          const cx3 = x + sx * EX[0] + sy * EY[0] + sz * EZ[0];
-          const cy3 = y + sx * EX[1] + sy * EY[1] + sz * EZ[1];
-          const cz3 = z + sx * EX[2] + sy * EY[2] + sz * EZ[2];
-          const pp = D / (D - cz3);
-          PX[k] = ox + cx3 * U * pp; PY[k] = oy - cy3 * U * pp;
-        }
-        // dynamic base colour (code, keys, hands, orbs)
-        let dyn = null, glow = 0, spr = spP;
-        if (v.k === 1) {
-          const ii = v.ii;
-          dyn = ii > 0.82 ? mix(C.phosA, C.hotA, (ii - 0.82) / 0.18) : mix([10, 30, 18], C.phosA, ii / 0.82);
-          if (ii > 0.45) { glow = ii * 0.8; if (ii > 0.85) spr = spH; }
-        } else if (v.k === 3) {
-          dyn = mix(C.clothA.map(c => c * 1.4), C.phosA, 0.1 + 0.85 * v.hit);
-          glow = v.hit * 0.9;
-        } else if (v.k === 2) {
-          dyn = C.hotA.map(c => c * 0.78); glow = 0.2;
-        } else if (v.k === 5) {
-          dyn = v.hot ? C.hotA : C.phosA; glow = 0.95;
-        } else if (v.k === 4) {
-          glow = v.e * pulse * 0.7;
-        }
-        if (isV && Math.abs(v.y - sweep) < 1) glow = Math.max(glow, 0.45);
+      /* ---- the sprite ---- */
+      const sw = cell - pad * 2;
+      const sweepOn = !still && booted && (T % 7) < 2.4;
+      const sweepY = sweepOn ? (T % 7) / 2.4 * (GH + 10) - 5 : -99;
+      const faceA = { f: Math.min(1, 0.72 + 0.28 * Math.sin(T * 2.1) + 0.25 * faceBoost), F: Math.min(1, 0.62 + 0.38 * Math.sin(T * 3.3 + 1) + 0.3 * faceBoost) };
+      const pulse = 0.78 + 0.22 * Math.sin(T * 2.4);
+      const rimP = 0.86 + 0.14 * Math.sin(T * 1.6);
 
-        ctx.globalAlpha = al;
-        ctx.strokeStyle = edge;
-        for (let f = 0; f < 6; f++) {
-          if (!(v.m & (1 << f))) continue;
-          const nx = NR[f][0], ny = NR[f][1], nz = NR[f][2];
-          if (nx * -(x + s * nx) + ny * -(y + s * ny) + nz * (D - (z + s * nz)) <= 0) continue;
-          ctx.fillStyle = dyn ? rgb(dyn.map(c => c * FS[f])) : v.c[f];
-          const F = FACE[f];
-          ctx.beginPath();
-          ctx.moveTo(PX[F[0]], PY[F[0]]);
-          ctx.lineTo(PX[F[1]], PY[F[1]]);
-          ctx.lineTo(PX[F[2]], PY[F[2]]);
-          ctx.lineTo(PX[F[3]], PY[F[3]]);
-          ctx.closePath();
-          ctx.fill();
-          ctx.stroke();
+      for (const g of groups) {
+        let a = 1;
+        const k = g.key;
+        if (still) a = 1;
+        else if (k === 'g') a = pulse;
+        else if (k === 'cursor') a = (T % 1.1) < 0.62 ? 1 : 0.08;
+        else if (k === 'f' || k === 'F') a = faceA[k];
+        else if (k === 'r' || k === 'R' || k === 'n' || k === 'N') a = rimP;
+        const dy = k.length === 2 && (k[1] === 'L' || k[1] === 'R') && 'hiH'.includes(k[0]) ? (tap[k[1]] > 0 ? 1 : 0) : 0;
+        ctx.fillStyle = g.fill;
+        const cs = g.cells;
+        for (let i = 0; i < cs.length; i++) {
+          const c = cs[i];
+          let ca = a;
+          if (!booted) {
+            const bt = Math.min(1, Math.max(0, (T - c.td) / 0.3));
+            if (bt <= 0) continue;
+            ca *= bt;
+          }
+          if (k === 'eqL' || k === 'eqR') { if ((k === 'eqL' ? eqL : eqR) === 0 && c.y !== 28) continue; }
+          ctx.globalAlpha = ca;
+          ctx.fillRect(ox + (c.x + rowOx[c.y]) * cell + pad, oy + (c.y + dy) * cell + pad, sw, sw);
         }
-        if (glow > 0.05) {
-          const r = U * p * (v.k === 5 ? 1.9 : 2.1);
-          ctx.globalCompositeOperation = 'lighter';
-          ctx.globalAlpha = Math.min(1, glow) * al;
-          ctx.drawImage(spr, ox + x * U * p - r, oy - y * U * p - r, r * 2, r * 2);
-          ctx.globalCompositeOperation = 'source-over';
+      }
+      // build-in flash + scan sweep (hot overlay)
+      ctx.fillStyle = HOT;
+      if (!booted) {
+        for (const c of cells) {
+          const bt = (T - c.td) / 0.3;
+          if (bt <= 0 || bt >= 1) continue;
+          ctx.globalAlpha = (1 - bt) * 0.85;
+          ctx.fillRect(ox + c.x * cell + pad, oy + c.y * cell + pad, sw, sw);
+        }
+      }
+      if (sweepOn) {
+        const y0 = Math.max(0, Math.floor(sweepY) - 1), y1 = Math.min(GH - 1, Math.floor(sweepY) + 1);
+        for (let y = y0; y <= y1; y++) {
+          ctx.globalAlpha = 0.34 * (1 - Math.abs(y - sweepY) / 2);
+          for (const c of rowCells[y]) ctx.fillRect(ox + (c.x + rowOx[y]) * cell + pad, oy + c.y * cell + pad, sw, sw);
+        }
+      }
+
+      /* ---- eyes: they follow the pointer and blink ---- */
+      if (T > 1.2) {
+        const flick = !booted && T < 1.6 && Math.random() < 0.4;
+        if (!flick) {
+          const bl = T - blinkAt, h = still ? 2 : (bl < 0.07 ? 1 : bl < 0.12 ? 0 : bl < 0.17 ? 1 : 2);
+          const ey = 26 + eyeDy;
+          ctx.fillStyle = HOT;
+          for (const bx of [30, 39]) {
+            const sx = bx + eyeDx;
+            ctx.globalAlpha = 1;
+            if (h === 0) { ctx.globalAlpha = 0.35; ctx.fillRect(ox + sx * cell + pad, oy + (ey + 1) * cell + pad + sw * 0.4, cell * 3 - pad * 2, sw * 0.25); continue; }
+            ctx.fillRect(ox + sx * cell + pad, oy + (ey + (2 - h)) * cell + pad, cell * 3 - pad * 2, cell * h - pad * 2);
+          }
+        }
+      }
+
+      /* ---- glow pass ---- */
+      ctx.globalCompositeOperation = 'lighter';
+      const R = cell * 2;
+      for (const g of groups) {
+        const gl = GLOW[g.key] !== undefined ? GLOW[g.key] : GLOW[g.ch];
+        if (!gl) continue;
+        let a = 1;
+        const k = g.key;
+        if (!still) {
+          if (k === 'g') a = pulse;
+          else if (k === 'cursor') a = (T % 1.1) < 0.62 ? 1 : 0;
+          else if (k === 'F') a = faceA.F;
+          else if (k === 'r' || k === 'R' || k === 'n' || k === 'N') a = rimP;
+        }
+        if (a < 0.03) continue;
+        const cs = g.cells;
+        for (let i = 0; i < cs.length; i++) {
+          const c = cs[i];
+          let ca = a * gl;
+          if (!booted) {
+            const bt = Math.min(1, Math.max(0, (T - c.td) / 0.3));
+            if (bt <= 0) continue;
+            ca *= bt;
+          }
+          if (k === 'eqL' || k === 'eqR') { if ((k === 'eqL' ? eqL : eqR) === 0 && c.y !== 28) continue; }
+          ctx.globalAlpha = Math.min(1, ca);
+          const dy = 'hiH'.includes(g.ch) ? (tap[k[1]] > 0 ? 1 : 0) : 0;
+          ctx.drawImage(sprP, ox + (c.x + 0.5 + rowOx[c.y]) * cell - R, oy + (c.y + 0.5 + dy) * cell - R, R * 2, R * 2);
+        }
+      }
+      if (T > 1.2) {
+        // eye glow
+        ctx.globalAlpha = 0.9;
+        const R2 = cell * 4.2;
+        for (const bx of [30, 39]) ctx.drawImage(sprH, ox + (bx + eyeDx + 1.5) * cell - R2, oy + (26 + eyeDy + 1) * cell - R2, R2 * 2, R2 * 2);
+      }
+      ctx.globalCompositeOperation = 'source-over';
+
+      /* ---- steam above the mug ---- */
+      if (!still && T > 1.2) {
+        ctx.fillStyle = rgbs(CP.U);
+        for (const s of steam) {
+          const a = Math.sin(Math.min(1, s.t / 1.5) * Math.PI) * 0.45;
+          ctx.globalAlpha = a;
+          const sx = s.x + Math.round(Math.sin(s.t * 3 + s.ph));
+          ctx.fillRect(ox + sx * cell + pad, oy + Math.round(s.y) * cell + pad, sw, sw);
         }
       }
       ctx.globalAlpha = 1;
-
-      // camera drifts with the pointer
-      const px = ptr.on ? ptr.x / innerWidth - 0.5 : 0, py = ptr.on ? ptr.y / innerHeight - 0.5 : 0;
-      const ty = still ? 0.28 : Math.sin(T * 0.45) * 0.22 + px * 0.6, tp = still ? 0.2 : 0.2 - py * 0.18;
-      const k = Math.min(1, dt * 4);
-      yaw += (ty - yaw) * k; pitch += (tp - pitch) * k;
-      if (!still && T > nextGlitch) { glitchAt = T; glitchY = 4 + Math.random() * 15; glitchAmp = Math.random() < 0.5 ? 1 : 2; nextGlitch = T + 2.5 + Math.random() * 3.5; }
     }
 
     /* ---- run loop ---- */
@@ -1629,28 +1733,31 @@ window.addEventListener('DOMContentLoaded', () => {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       T += dt;
+      if (!booted && T > 2.05) booted = true;
       draw(dt);
       raf = requestAnimationFrame(loop);
     }
     function kick() { if (!raf && running && visible && !still) { last = performance.now(); raf = requestAnimationFrame(loop); } }
     new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) kick(); }).observe(hacker);
     document.addEventListener('visibilitychange', () => { if (!document.hidden) kick(); });
-    let rz = 0, lastBox = '';
+    let rz = 0;
     new ResizeObserver(() => {
       if (!started) return;
       cancelAnimationFrame(rz);
-      rz = requestAnimationFrame(() => { size(); if (still) { T = 40; yaw = 0.28; draw(0); } });
+      rz = requestAnimationFrame(() => { size(); if (still) draw(0); });
     }).observe(hacker);
-    onTheme.push(() => { if (!started) return; bake(); if (still) { T = 40; draw(0); } });
+    onTheme.push(() => { if (!started) return; bake(); size(); if (still) draw(0); });
+    hacker.addEventListener('click', () => { matrixMode(); });
 
     return {
       start(build) {
         started = true;
         still = reduce;
-        size(); bake();
+        bake(); size();
         T = build && !reduce ? 0 : 40;
+        booted = T >= 2.05;
         running = true;
-        if (still) { yaw = 0.28; draw(0); } else kick();
+        if (still) { T = 40; booted = true; draw(0); } else kick();
       }
     };
   })();
