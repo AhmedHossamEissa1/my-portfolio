@@ -171,7 +171,6 @@
     transition: opacity 600ms var(--ease-out);
   }
   @media (max-width: 760px) { #rain { opacity: calc(var(--rain-o, .26) * .65); } }
-  .matrix-mode #rain { opacity: .85 !important; }
   .crt {
     position: fixed; inset: 0; z-index: 80; pointer-events: none;
     background:
@@ -1110,11 +1109,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   const ORDER = ['#hero', '#about', '#experience', '#projects', '#volunteering', '#skills', '#contact'];
-  const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-  let kIdx = 0;
   document.addEventListener('keydown', e => {
-    kIdx = e.key === KONAMI[kIdx] ? kIdx + 1 : (e.key === KONAMI[0] ? 1 : 0);
-    if (kIdx === KONAMI.length) { kIdx = 0; matrixMode(); }
     if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return;
     if (e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
     if (/^[0-6]$/.test(e.key)) { e.preventDefault(); go(ORDER[+e.key]); }
@@ -1747,7 +1742,6 @@ window.addEventListener('DOMContentLoaded', () => {
       rz = requestAnimationFrame(() => { size(); if (still) draw(0); });
     }).observe(hacker);
     onTheme.push(() => { if (!started) return; bake(); size(); if (still) draw(0); });
-    hacker.addEventListener('click', () => { matrixMode(); });
 
     return {
       start(build) {
@@ -1763,7 +1757,6 @@ window.addEventListener('DOMContentLoaded', () => {
   })();
 
   /* ---------- background rain ---------- */
-  let rainBoost = 0;
   (() => {
     const c = $('#rain');
     const ctx = c && c.getContext ? c.getContext('2d') : null;
@@ -1801,10 +1794,9 @@ window.addEventListener('DOMContentLoaded', () => {
       ctx.fillRect(0, 0, w, h);
       ctx.font = font;
       ctx.textBaseline = 'top';
-      const boost = rainBoost > 0 ? 2.2 : 1;
       for (let i = 0; i < drops.length; i++) {
         const d = drops[i];
-        d.a += d.v * boost;
+        d.a += d.v;
         if (d.a < 1) continue;
         d.a -= 1;
         const x = i * CW + 3, y = d.y * FS;
@@ -1825,7 +1817,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
     function loop(now) {
-      const every = rainBoost > 0 ? 40 : (scrollY < heroH ? 50 : 95);
+      const every = scrollY < heroH ? 50 : 95;
       if (now - last >= every) { last = now; step(); }
       requestAnimationFrame(loop);
     }
@@ -1838,13 +1830,6 @@ window.addEventListener('DOMContentLoaded', () => {
     onTheme.push(() => { paint(); if (reduce) still(); });
     if (!reduce) requestAnimationFrame(loop);
   })();
-
-  function matrixMode() {
-    if (reduce) return;
-    root.classList.add('matrix-mode');
-    rainBoost = 1;
-    setTimeout(() => { root.classList.remove('matrix-mode'); rainBoost = 0; }, 6000);
-  }
 
   /* ---------- boot sequence: the one authored moment ---------- */
   function typeTo(el, text, perChar) {
